@@ -15,7 +15,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Menu, ShoppingBag, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetTrigger } from "@/components/ui/sheet";
 import { useCartStore } from "@/stores/cart-store";
 import { cn } from "@/lib/utils";
 
@@ -94,11 +94,14 @@ export function Header() {
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[280px] bg-background">
+            <SheetContent side="right" aria-describedby={undefined} className="w-[280px] bg-background">
               <SheetHeader className="px-6 pt-6">
                 <SheetTitle className="font-montserrat text-2xl font-bold">
                   Menú
                 </SheetTitle>
+                <SheetDescription className="sr-only">
+                  Menú de navegación principal
+                </SheetDescription>
               </SheetHeader>
               <nav className="mt-8 flex flex-col gap-2 px-6" aria-label="Navegación móvil">
                 {NAV_LINKS.map((link) => (

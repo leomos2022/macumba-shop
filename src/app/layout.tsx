@@ -6,6 +6,7 @@ import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";
+import { CartDrawer } from "@/components/cart/CartDrawer";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -67,6 +68,7 @@ export default function RootLayout({
         <main className="flex-1 flex flex-col">{children}</main>
         <Footer />
         <WhatsAppFloat />
+        <CartDrawer />
         <Toaster />
         <SonnerToaster />
       </body>
