@@ -12,7 +12,7 @@
 'use client';
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { Menu, ShoppingBag, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetTrigger } from "@/components/ui/sheet";
@@ -26,9 +26,26 @@ const NAV_LINKS = [
   { href: "/carrito", label: "Carrito" },
 ];
 
+/**
+ * Hook para hidratar el store de Zustand en el cliente SIN causar mismatch SSR.
+ * Usa useSyncExternalStore con getServerSnapshot=0 para que el primer render
+ * del cliente coincida con el del servidor, y se actualice cuando el store
+ * se hidrate desde localStorage.
+ */
+function useCartItemCount(): number {
+  return useSyncExternalStore(
+    // Subscribe a cambios del store
+    (callback) => useCartStore.subscribe(callback).unsubscribe,
+    // Client snapshot
+    () => useCartStore.getState().getTotalItems(),
+    // Server snapshot (siempre 0 para coincidir con SSR)
+    () => 0
+  );
+}
+
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const totalItems = useCartStore((s) => s.getTotalItems());
+  const totalItems = useCartItemCount();
   const openDrawer = useCartStore((s) => s.openDrawer);
 
   return (

@@ -1,43 +1,45 @@
 /**
  * CheckoutSummary — Resumen del carrito + CTA WhatsApp.
  * ------------------------------------------------------------
- * Componente cliente que:
- *   • Calcula subtotal, extras y total
- *   • Construye el mensaje de WhatsApp usando lib/whatsapp/buildMessage
- *   • Abre wa.me con el mensaje en una nueva pestaña
+ * Flujo de checkout (Ticket 5):
+ *   1. POST /api/orders con items + total
+ *   2. API devuelve { id, whatsappUrl }
+ *   3. Abrir wa.me con el ID REAL del pedido (no TEMP-xxx)
+ *   4. El pedido queda persistido en Supabase (tabla `orders`)
+ *   5. El artesano lo ve en Supabase Dashboard → Table Editor
  *
- * NOTA (Fase 1, MVP): en este ticket NO se persiste el pedido en
- * Supabase todavía. El pedido se guarda en /api/orders en el Ticket 5.
- * Por ahora, el mensaje de WhatsApp contiene todo lo necesario
- * (items, precios, total) para que el artesano lo procese manualmente.
+ * Documento de contexto: sección 7.2 y 11 regla 3
  */
 
 'use client';
 
 import { useState } from "react";
-import { MessageCircle, Loader2, ShoppingBag } from "lucide-react";
+import { MessageCircle, Loader2, ShoppingBag, AlertCircle, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useCartStore } from "@/stores/cart-store";
-import {
-  buildWhatsAppMessage,
-  buildWhatsAppUrl,
-} from "@/lib/whatsapp/buildMessage";
+import { toast } from "sonner";
+import Link from "next/link";
 
 interface CheckoutSummaryProps {
   variant?: 'drawer' | 'page';
 }
 
+interface CreateOrderResponse {
+  id: string;
+  status: string;
+  whatsappUrl: string;
+  total: number;
+}
+
 export function CheckoutSummary({ variant = 'drawer' }: CheckoutSummaryProps) {
   const [isRedirecting, setIsRedirecting] = useState(false);
+  const [createdOrderId, setCreatedOrderId] = useState<string | null>(null);
 
   const items = useCartStore((s) => s.items);
   const total = useCartStore((s) => s.getTotalPrice());
   const clear = useCartStore((s) => s.clear);
   const closeDrawer = useCartStore((s) => s.closeDrawer);
-
-  const phone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '';
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? '';
 
   const formatPrice = (n: number) =>
     new Intl.NumberFormat("es-CO", {
@@ -62,38 +64,106 @@ export function CheckoutSummary({ variant = 'drawer' }: CheckoutSummaryProps) {
     setIsRedirecting(true);
 
     try {
-      // Generar un ID temporal para mostrar como referencia en el mensaje
-      // (en el Ticket 5 esto vendrá de Supabase al insertar el pedido)
-      const tempId = `TEMP-${Date.now().toString(36).toUpperCase()}`;
-
-      const message = buildWhatsAppMessage({
-        order: {
-          id: tempId,
-          itemsSnapshot: items,
+      // 1. POST a /api/orders para persistir el pedido en Supabase
+      const response = await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items,
           total,
-          customerName: '', // El usuario lo completa en el chat de WhatsApp
-        },
-        siteUrl: siteUrl || undefined,
+        }),
       });
 
-      const url = buildWhatsAppUrl(message, phone);
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(
+          errorData.error ?? `Error del servidor (${response.status})`
+        );
+      }
 
-      // Abrir WhatsApp en nueva pestaña
-      window.open(url, '_blank', 'noopener,noreferrer');
+      const data: CreateOrderResponse = await response.json();
 
-      // Pequeño delay para asegurar que el popup se abra
+      // 2. Guardar el ID del pedido creado (para mostrar link a /pedido/[id])
+      setCreatedOrderId(data.id);
+
+      // 3. Abrir WhatsApp con el mensaje generado (que incluye el ID real)
+      window.open(data.whatsappUrl, '_blank', 'noopener,noreferrer');
+
+      // 4. Feedback al usuario
+      toast.success('¡Pedido creado!', {
+        description: `Pedido #${data.id.slice(0, 8).toUpperCase()} — abre WhatsApp para confirmar`,
+        duration: 5000,
+      });
+
+      // 5. Cerrar drawer (si aplica) y limpiar carrito tras éxito
       setTimeout(() => {
         if (variant === 'drawer') closeDrawer();
-      }, 500);
+      }, 800);
     } catch (err) {
       console.error('[checkout] Error:', err);
+      toast.error('No se pudo crear el pedido', {
+        description:
+          err instanceof Error
+            ? err.message
+            : 'Hubo un problema. Intenta de nuevo.',
+        duration: 6000,
+      });
     } finally {
       setTimeout(() => setIsRedirecting(false), 1500);
     }
   }
 
-  if (items.length === 0) {
+  if (items.length === 0 && !createdOrderId) {
     return null;
+  }
+
+  // Estado post-creación exitosa
+  if (createdOrderId) {
+    return (
+      <div className="space-y-3">
+        <div className="rounded-lg border border-green-500/30 bg-green-500/5 p-4 text-center">
+          <CheckCircle2 className="mx-auto mb-2 h-8 w-8 text-green-600" aria-hidden />
+          <p className="font-montserrat text-sm font-semibold text-foreground">
+            ¡Pedido creado!
+          </p>
+          <p className="mt-1 text-xs text-muted-foreground">
+            Si WhatsApp no se abrió automáticamente, usa el botón de abajo.
+          </p>
+        </div>
+
+        <Button
+          asChild
+          size="lg"
+          className="h-12 w-full bg-[#25D366] text-base font-medium text-white hover:bg-[#1ebe5d]"
+        >
+          <a
+            href={buildFallbackWhatsAppUrl(items, total, createdOrderId)}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <MessageCircle className="mr-2 h-5 w-5" />
+            Abrir WhatsApp
+          </a>
+        </Button>
+
+        <Button asChild variant="outline" size="sm" className="w-full">
+          <Link href={`/pedido/${createdOrderId}`}>
+            Ver detalle del pedido →
+          </Link>
+        </Button>
+
+        <button
+          type="button"
+          onClick={() => {
+            clear();
+            setCreatedOrderId(null);
+          }}
+          className="block w-full pt-1 text-center text-xs text-muted-foreground underline-offset-4 hover:underline"
+        >
+          Limpiar y crear otro pedido
+        </button>
+      </div>
+    );
   }
 
   return (
@@ -134,7 +204,7 @@ export function CheckoutSummary({ variant = 'drawer' }: CheckoutSummaryProps) {
         {isRedirecting ? (
           <>
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            Abriendo WhatsApp...
+            Creando pedido...
           </>
         ) : (
           <>
@@ -148,6 +218,12 @@ export function CheckoutSummary({ variant = 'drawer' }: CheckoutSummaryProps) {
       <p className="flex items-center justify-center gap-1.5 text-[11px] text-muted-foreground">
         <ShoppingBag className="h-3 w-3" aria-hidden />
         El pago y envío se coordinan por chat. Sin pasarela de pagos.
+      </p>
+
+      {/* Info sobre qué pasa después */}
+      <p className="flex items-start gap-1.5 text-[11px] text-muted-foreground/80">
+        <AlertCircle className="mt-0.5 h-3 w-3 shrink-0" aria-hidden />
+        Al confirmar, crearemos tu pedido y abriremos WhatsApp con el resumen. Tus artesanos lo verán en su panel.
       </p>
 
       {/* Acción secundaria: vaciar carrito */}
@@ -164,4 +240,36 @@ export function CheckoutSummary({ variant = 'drawer' }: CheckoutSummaryProps) {
       </button>
     </div>
   );
+}
+
+/* ---------- Helpers ---------- */
+
+/**
+ * Fallback: si la API no devolvió whatsappUrl por algún motivo,
+ * construimos una URL básica con la info que tenemos.
+ */
+function buildFallbackWhatsAppUrl(
+  items: { productName: string; size: string; quantity: number; basePrice: number }[],
+  total: number,
+  orderId: string
+): string {
+  const phone = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '').replace(/[^0-9]/g, '');
+  const ref = orderId.replace(/-/g, '').slice(0, 8).toUpperCase();
+  const lines = [
+    '🛒 NUEVO PEDIDO — MACUMBA SHOP',
+    `Pedido #: ${ref}`,
+    '',
+    ...items.map(
+      (i, idx) =>
+        `${idx + 1}) ${i.productName} (Talla ${i.size}) — $${(
+          i.basePrice * i.quantity
+        ).toFixed(2)}`
+    ),
+    '',
+    `💵 TOTAL: $${total.toFixed(2)}`,
+    '',
+    `Ver detalle: ${process.env.NEXT_PUBLIC_SITE_URL}/pedido/${orderId}`,
+  ];
+  const message = encodeURIComponent(lines.join('\n'));
+  return `https://wa.me/${phone}?text=${message}`;
 }
