@@ -3,15 +3,20 @@
  * ------------------------------------------------------------
  * - Usa la SERVICE ROLE KEY — acceso total, IGNORA RLS.
  * - SECRETO. JAMÁS importar este archivo en código del cliente.
- * - Se usa para escrituras (orders, storage de previews, etc.).
+ * - Se usa para escrituras (orders, storage de previews, etc.) y para
+ *   lecturas en Server Components donde se quiere bypass de RLS.
  *
  * Documento de contexto: sección 4 y 11 (reglas 3 y 4).
+ *
+ * IMPORTANTE Next.js 16: `cookies()` ahora es async. Hay que
+ * usar `await cookies()` y manejar el caso donde se llama fuera de
+ * un contexto de request (ej. scripts standalone).
  */
 
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 
-export function createClient() {
+export async function createClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
@@ -22,7 +27,7 @@ export function createClient() {
     );
   }
 
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
 
   return createServerClient(url, serviceRoleKey, {
     cookies: {
