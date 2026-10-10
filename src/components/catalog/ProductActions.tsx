@@ -1,8 +1,6 @@
 /**
- * ProductActions — Wrapper cliente que sincroniza SizeSelector + AddToCartButton.
- * ------------------------------------------------------------
- * Mantiene el estado local de la talla seleccionada y lo pasa
- * al botón de añadir al carrito.
+ * ProductActions — Wrapper que sincroniza SizeSelector + AddToCartButton.
+ * Pasa cartImageUrl (fondo blanco) al carrito.
  */
 
 'use client';
@@ -17,10 +15,9 @@ interface ProductActionsProps {
   productSlug: string;
   basePrice: number;
   sizes: string[];
-  /** Si true y NO es premade, mostrar "Personalizar en El Estudio" */
   isCustomizable: boolean;
-  /** Si true, mostrar botón "Añadir al carrito" (venta directa) */
   isPremade: boolean;
+  cartImageUrl?: string;
 }
 
 export function ProductActions({
@@ -31,26 +28,24 @@ export function ProductActions({
   sizes,
   isCustomizable,
   isPremade,
+  cartImageUrl,
 }: ProductActionsProps) {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
   return (
     <div className="space-y-6">
-      {/* Selector de tallas — siempre visible si hay tallas */}
       <SizeSelector sizes={sizes} onChange={setSelectedSize} />
 
-      {/* CTA según tipo de producto */}
-      {/* Si es premade: botón directo de añadir al carrito */}
       {isPremade && (
         <AddToCartButton
           productId={productId}
           productName={productName}
           basePrice={basePrice}
           selectedSize={selectedSize}
+          cartImageUrl={cartImageUrl}
         />
       )}
 
-      {/* Si es customizable pero NO premade: redirige a El Estudio */}
       {isCustomizable && !isPremade && (
         <AddToCartButton
           productId={productId}
@@ -62,7 +57,6 @@ export function ProductActions({
         />
       )}
 
-      {/* Si es BOTH premade + customizable: dos botones */}
       {isPremade && isCustomizable && (
         <div className="space-y-2 border-t border-border pt-4">
           <p className="text-center text-xs text-muted-foreground">
@@ -70,7 +64,7 @@ export function ProductActions({
           </p>
           <a
             href={`/estudio?producto=${productSlug}`}
-            className="block rounded-md border border-border bg-background px-4 py-3 text-center text-sm font-medium text-foreground transition-colors hover:border-primary/40 hover:bg-accent/30"
+            className="block rounded-md border border-border bg-background px-4 py-3 text-center text-sm font-medium text-foreground transition-colors hover:border-highlight/40 hover:bg-accent/30"
           >
             Personalizar en El Estudio →
           </a>

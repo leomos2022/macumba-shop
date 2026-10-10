@@ -1,12 +1,7 @@
 /**
- * Estado global del carrito — Zustand + middleware persist.
- * ------------------------------------------------------------
- * - Persiste en localStorage entre sesiones.
- * - Tipado estricto: cada item es `CartItem` (ver src/types).
- * - En Fase 1 solo se usa para prendas premade. Los custom designs
- *   (con DesignPlacement y previewUrl) llegan en Fase 2.
- *
- * Documento de contexto: sección 7.1
+ * Estado global del carrito — Zustand + persist.
+ * Guarda cartImageUrl (versión fondo blanco) para mostrar en el carrito.
+ * Precios en COP (pesos colombianos).
  */
 
 'use client';
@@ -14,28 +9,19 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { v4 as uuidv4 } from 'uuid';
-import type { CartItem, CartItemCustomDesign } from '@/types';
+import type { CartItem } from '@/types';
 
 interface CartState {
   items: CartItem[];
-  isOpen: boolean; // drawer abierto/cerrado (lo usa CartDrawer)
+  isOpen: boolean;
 
-  // ----- actions -----
   addPremade: (input: {
     productId: string;
     productName: string;
     size: string;
     quantity: number;
     basePrice: number;
-  }) => void;
-
-  addCustom: (input: {
-    productId: string;
-    productName: string;
-    size: string;
-    quantity: number;
-    basePrice: number;
-    customDesign: CartItemCustomDesign;
+    cartImageUrl?: string;
   }) => void;
 
   removeItem: (id: string) => void;
@@ -44,7 +30,6 @@ interface CartState {
   openDrawer: () => void;
   closeDrawer: () => void;
 
-  // ----- selectors (funciones puras, no mutan estado) -----
   getTotalItems: () => number;
   getTotalPrice: () => number;
 }
@@ -55,9 +40,8 @@ export const useCartStore = create<CartState>()(
       items: [],
       isOpen: false,
 
-      addPremade: ({ productId, productName, size, quantity, basePrice }) =>
+      addPremade: ({ productId, productName, size, quantity, basePrice, cartImageUrl }) =>
         set((state) => {
-          // Si ya existe el mismo premade con la misma talla, sumamos cantidad
           const existing = state.items.find(
             (i) =>
               i.kind === 'premade' &&
@@ -81,29 +65,7 @@ export const useCartStore = create<CartState>()(
             quantity,
             basePrice,
             kind: 'premade',
-          };
-          return { items: [...state.items, item], isOpen: true };
-        }),
-
-      addCustom: ({
-        productId,
-        productName,
-        size,
-        quantity,
-        basePrice,
-        customDesign,
-      }) =>
-        set((state) => {
-          // Cada custom design es único — siempre se agrega como nuevo item
-          const item: CartItem = {
-            id: uuidv4(),
-            productId,
-            productName,
-            size,
-            quantity,
-            basePrice,
-            kind: 'custom',
-            customDesign,
+            cartImageUrl,
           };
           return { items: [...state.items, item], isOpen: true };
         }),
@@ -143,8 +105,17 @@ export const useCartStore = create<CartState>()(
     {
       name: 'macumba-cart',
       storage: createJSONStorage(() => localStorage),
-      // Solo persistimos los items, no el estado del drawer
       partialize: (state) => ({ items: state.items }),
     }
   )
 );
+
+/** Formatea precio en pesos colombianos (COP) */
+export function formatCOP(n: number): string {
+  return new Intl.NumberFormat("es-CO", {
+    style: "currency",
+    currency: "COP",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(n);
+}

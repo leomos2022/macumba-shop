@@ -1,14 +1,11 @@
 /**
  * ProductGrid con filtros por categoría.
  * ------------------------------------------------------------
- * Componente cliente que recibe todos los productos desde el server
- * y permite filtrarlos por categoría en el cliente (sin recargar).
- *
- * Categorías soportadas:
- *   • all — todas
- *   • jacket — chaquetas
- *   • pants — pantalones
- *   • custom-only — solo personalizables (sin versión premade)
+ * Categorías:
+ *   • Todo — todas las prendas
+ *   • Chaquetas — category = 'jacket'
+ *   • Pantalones — category = 'pants' (futuro)
+ *   • Personalizables — is_customizable = true
  */
 
 'use client';
@@ -19,7 +16,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { Product, ProductCategory } from "@/types";
 
-type FilterCategory = 'all' | ProductCategory;
+type FilterCategory = 'all' | 'chaquetas' | 'pantalones' | 'personalizables';
 
 interface ProductGridProps {
   products: Product[];
@@ -27,9 +24,9 @@ interface ProductGridProps {
 
 const FILTER_TABS: { key: FilterCategory; label: string; short: string }[] = [
   { key: 'all', label: 'Todo', short: 'Todo' },
-  { key: 'jacket', label: 'Chaquetas', short: 'Chaquetas' },
-  { key: 'pants', label: 'Pantalones', short: 'Pantalones' },
-  { key: 'custom-only', label: 'Personalizables', short: 'Custom' },
+  { key: 'chaquetas', label: 'Chaquetas', short: 'Chaquetas' },
+  { key: 'pantalones', label: 'Pantalones', short: 'Pantalones' },
+  { key: 'personalizables', label: 'Personalizables', short: 'Custom' },
 ];
 
 export function ProductGrid({ products }: ProductGridProps) {
@@ -37,20 +34,25 @@ export function ProductGrid({ products }: ProductGridProps) {
 
   const filtered = useMemo(() => {
     if (filter === 'all') return products;
-    return products.filter((p) => p.category === filter);
+    if (filter === 'chaquetas') {
+      return products.filter((p) => p.category === 'jacket' && !p.isCustomizable);
+    }
+    if (filter === 'pantalones') {
+      return products.filter((p) => p.category === 'pants');
+    }
+    if (filter === 'personalizables') {
+      return products.filter((p) => p.isCustomizable);
+    }
+    return products;
   }, [products, filter]);
 
   const counts = useMemo(() => {
-    const c: Record<FilterCategory, number> = {
+    return {
       all: products.length,
-      jacket: 0,
-      pants: 0,
-      'custom-only': 0,
-    };
-    products.forEach((p) => {
-      c[p.category] = (c[p.category] ?? 0) + 1;
-    });
-    return c;
+      chaquetas: products.filter((p) => p.category === 'jacket' && !p.isCustomizable).length,
+      pantalones: products.filter((p) => p.category === 'pants').length,
+      personalizables: products.filter((p) => p.isCustomizable).length,
+    } as Record<FilterCategory, number>;
   }, [products]);
 
   return (
@@ -97,11 +99,11 @@ export function ProductGrid({ products }: ProductGridProps) {
       {/* Grid de productos */}
       {filtered.length === 0 ? (
         <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-border bg-card/30 py-20 text-center">
-          <p className="font-montserrat text-lg font-semibold text-foreground">
+          <p className="font-syne text-lg font-semibold text-foreground">
             No hay productos en esta categoría
           </p>
           <p className="mt-2 text-sm text-muted-foreground max-w-md">
-            Estamos pintando nuevas prendas a mano. Vuelve pronto o síguenos en Instagram para ver los lanzamientos.
+            Estamos pintando nuevas prendas a mano. Vuelve pronto o síguenos en Instagram.
           </p>
           <Button
             variant="outline"

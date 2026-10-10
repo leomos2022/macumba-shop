@@ -1,41 +1,92 @@
 /**
- * Queries tipadas para catálogo.
- * ------------------------------------------------------------
- * Documento de contexto: sección 11 regla 5 — usar cliente anónimo con RLS.
+ * Queries tipadas para catálogo MACUMBA.
+ * Trae productos + sus vistas (front/back) desde Supabase.
  *
- * Estas funciones se usan en Server Components (catálogo, ficha de producto)
- * pasando el cliente creado desde lib/supabase/server.ts o directamente
- * desde lib/supabase/client.ts en componentes cliente.
+ * product_views.mockup_url = imagen para CATÁLOGO (foto original)
+ * product_views.shadow_url = imagen para CARRITO (fondo blanco, versión "car")
  */
 
-import type { Product, ProductView, DesignAsset, PricingSetting } from '@/types';
+import type { Product, ProductView, ProductCategory } from '@/types';
 import type { SupabaseClient } from '@supabase/supabase-js';
 
 type AnySupabaseClient = SupabaseClient<any, any, any>;
 
-/** Lista todos los productos activos, ordenados por sort_order */
+interface ProductRow {
+  id: string;
+  slug: string;
+  name: string;
+  description: string | null;
+  base_price: number;
+  sizes: string[];
+  category: string;
+  is_customizable: boolean;
+  is_premade: boolean;
+  is_active: boolean;
+  sort_order: number;
+  created_at: string;
+  product_views: Array<{
+    id: string;
+    view_type: string;
+    mockup_url: string;
+    fabric_texture_url: string | null;
+    shadow_url: string | null;
+    print_area: any;
+    sort_order: number;
+  }>;
+}
+
+function mapProductRow(row: ProductRow): Product {
+  const frontView = row.product_views?.find((v) => v.view_type === 'front')
+    ?? row.product_views?.[0];
+
+  return {
+    id: row.id,
+    slug: row.slug,
+    name: row.name,
+    description: row.description,
+    basePrice: Number(row.base_price),
+    sizes: row.sizes ?? [],
+    category: row.category as ProductCategory,
+    isCustomizable: row.is_customizable,
+    isPremade: row.is_premade,
+    isActive: row.is_active,
+    sortOrder: row.sort_order ?? 0,
+    createdAt: row.created_at,
+    // mockup_url = imagen para catálogo (original)
+    imageUrl: frontView?.mockup_url,
+    // shadow_url = imagen para carrito (fondo blanco, versión "car")
+    cartImageUrl: frontView?.shadow_url ?? undefined,
+  };
+}
+
 export async function listProducts(
   supabase: AnySupabaseClient
 ): Promise<Product[]> {
   const { data, error } = await supabase
     .from('products')
-    .select('*')
+    .select(`
+      *,
+      product_views (*)
+    `)
     .eq('is_active', true)
     .order('sort_order', { ascending: true });
 
   if (error) throw error;
 
-  return (data ?? []).map(rowToProduct);
+  const rows = (data ?? []) as unknown as ProductRow[];
+  return rows.map(mapProductRow);
 }
 
-/** Busca un producto por su slug */
 export async function getProductBySlug(
   supabase: AnySupabaseClient,
   slug: string
 ): Promise<Product | null> {
   const { data, error } = await supabase
     .from('products')
-    .select('*')
+    .select(`
+      *,
+      product_views (*)
+    `)
     .eq('slug', slug)
     .eq('is_active', true)
     .maybeSingle();
@@ -43,10 +94,9 @@ export async function getProductBySlug(
   if (error) throw error;
   if (!data) return null;
 
-  return rowToProduct(data);
+  return mapProductRow(data as unknown as ProductRow);
 }
 
-/** Lista las vistas (frente/dorso) de un producto */
 export async function listProductViews(
   supabase: AnySupabaseClient,
   productId: string
@@ -59,62 +109,7 @@ export async function listProductViews(
 
   if (error) throw error;
 
-  return (data ?? []).map(rowToProductView);
-}
-
-/** Lista todos los design_assets activos */
-export async function listDesignAssets(
-  supabase: AnySupabaseClient
-): Promise<DesignAsset[]> {
-  const { data, error } = await supabase
-    .from('design_assets')
-    .select('*')
-    .eq('is_active', true)
-    .order('created_at', { ascending: false });
-
-  if (error) throw error;
-
-  return (data ?? []).map(rowToDesignAsset);
-}
-
-/** Lista todas las configuraciones de precios */
-export async function listPricingSettings(
-  supabase: AnySupabaseClient
-): Promise<PricingSetting[]> {
-  const { data, error } = await supabase
-    .from('pricing_settings')
-    .select('*');
-
-  if (error) throw error;
-
-  return (data ?? []).map((row) => ({
-    key: row.key,
-    value: Number(row.value),
-    description: row.description,
-  }));
-}
-
-/* ---------- Mappers (snake_case DB → camelCase TS) ---------- */
-
-function rowToProduct(row: any): Product {
-  return {
-    id: row.id,
-    slug: row.slug,
-    name: row.name,
-    description: row.description,
-    basePrice: Number(row.base_price),
-    sizes: row.sizes ?? [],
-    category: row.category,
-    isCustomizable: row.is_customizable,
-    isPremade: row.is_premade,
-    isActive: row.is_active,
-    sortOrder: row.sort_order ?? 0,
-    createdAt: row.created_at,
-  };
-}
-
-function rowToProductView(row: any): ProductView {
-  return {
+  return (data ?? []).map((row: any) => ({
     id: row.id,
     productId: row.product_id,
     viewType: row.view_type,
@@ -123,17 +118,33 @@ function rowToProductView(row: any): ProductView {
     shadowUrl: row.shadow_url,
     printArea: row.print_area,
     sortOrder: row.sort_order ?? 0,
-  };
+  }));
 }
 
-function rowToDesignAsset(row: any): DesignAsset {
-  return {
-    id: row.id,
-    name: row.name,
-    imageUrl: row.image_url,
-    isPremium: row.is_premium,
-    extraPrice: Number(row.extra_price),
-    isActive: row.is_active,
-    createdAt: row.created_at,
-  };
+export async function listDesignAssets(
+  supabase: AnySupabaseClient
+) {
+  const { data, error } = await supabase
+    .from('design_assets')
+    .select('*')
+    .eq('is_active', true)
+    .order('created_at', { ascending: false });
+
+  if (error) throw error;
+  return data ?? [];
+}
+
+export async function listPricingSettings(
+  supabase: AnySupabaseClient
+) {
+  const { data, error } = await supabase
+    .from('pricing_settings')
+    .select('*');
+
+  if (error) throw error;
+  return (data ?? []).map((row: any) => ({
+    key: row.key,
+    value: Number(row.value),
+    description: row.description,
+  }));
 }

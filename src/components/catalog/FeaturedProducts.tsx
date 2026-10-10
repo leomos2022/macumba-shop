@@ -8,6 +8,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ProductCard } from "@/components/catalog/ProductCard";
+import { AmbientGlow } from "@/components/layout/AmbientGlow";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/server";
 import { listProducts } from "@/lib/supabase/queries";
@@ -32,14 +33,15 @@ export async function FeaturedProducts() {
   }
 
   return (
-    <section className="border-t border-border py-20">
+    <section className="relative border-t border-white/[0.06] py-20">
+      <AmbientGlow variant="subtle" />
       <div className="container mx-auto px-4">
         <div className="mb-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
           <div className="max-w-2xl">
-            <p className="text-xs font-medium uppercase tracking-[0.2em] text-primary">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
               Colección actual
             </p>
-            <h2 className="mt-2 font-montserrat text-3xl font-bold tracking-tight md:text-4xl">
+            <h2 className="mt-2 font-syne text-3xl font-bold tracking-tight md:text-5xl">
               Prendas destacadas
             </h2>
             <p className="mt-3 text-sm text-muted-foreground md:text-base">
@@ -48,7 +50,12 @@ export async function FeaturedProducts() {
               personalización.
             </p>
           </div>
-          <Button asChild variant="outline" size="sm" className="shrink-0">
+          <Button
+            asChild
+            variant="outline"
+            size="sm"
+            className="shrink-0 border-white/20 bg-white/[0.04] backdrop-blur-md hover:border-primary/40 hover:bg-primary/[0.08]"
+          >
             <Link href="/catalogo">
               Ver todo el catálogo
               <ArrowRight className="ml-2 h-4 w-4" />

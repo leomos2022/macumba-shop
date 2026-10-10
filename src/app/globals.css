@@ -6,8 +6,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-poppins);
-  --font-display: var(--font-montserrat);
+  --font-sans: var(--font-outfit);
+  --font-display: var(--font-outfit);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -37,6 +37,7 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-highlight: var(--highlight);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -44,98 +45,84 @@
 }
 
 /* ============================================================
-   MACUMBA SHOP — Tema oscuro terroso (negro carbón + beige arena)
-   ============================================================
-   El tema por defecto es oscuro (la marca busca resaltar el arte
-   pintado a mano sobre fondo neutro). El modo claro se mantiene
-   disponible pero no es el principal.
-*/
+   MACUMBA SHOP — Tema "Obsidiana & Arte Vivo"
+   ============================================================ */
 
 :root {
-  /* Radio de bordes */
   --radius: 0.5rem;
 
-  /* ---------- Tema oscuro (DEFAULT, sin clase .dark necesaria) ---------- */
-  /* Negro carbón con tinte cálido */
-  --background: oklch(0.18 0.008 60);          /* ~#1c1a17 */
-  --foreground: oklch(0.96 0.015 75);          /* beige claro ~#f3ede0 */
-
-  --card: oklch(0.22 0.010 60);                /* negro carbón +10% */
-  --card-foreground: oklch(0.96 0.015 75);
-
-  --popover: oklch(0.22 0.010 60);
-  --popover-foreground: oklch(0.96 0.015 75);
-
-  /* Acento principal: ocre/terracota — destaque del arte pintado a mano */
-  --primary: oklch(0.70 0.135 60);             /* terracota */
-  --primary-foreground: oklch(0.18 0.008 60);
-
-  /* Secundario: gris pizarra cálido */
-  --secondary: oklch(0.30 0.010 60);
-  --secondary-foreground: oklch(0.96 0.015 75);
-
-  --muted: oklch(0.26 0.008 60);
-  --muted-foreground: oklch(0.70 0.015 75);
-
-  /* Acento hover: amarillo arena suave */
-  --accent: oklch(0.40 0.020 70);
-  --accent-foreground: oklch(0.96 0.015 75);
-
-  --destructive: oklch(0.65 0.220 25);
-
+  /* Tema Obsidiana (DEFAULT) */
+  --background: oklch(0.13 0.015 280);
+  --foreground: oklch(0.96 0.005 60);
+  --card: oklch(0.17 0.018 280);
+  --card-foreground: oklch(0.96 0.005 60);
+  --popover: oklch(0.17 0.018 280);
+  --popover-foreground: oklch(0.96 0.005 60);
+  --primary: oklch(0.55 0.20 25);
+  --primary-foreground: oklch(0.98 0.005 60);
+  --secondary: oklch(0.40 0.18 320);
+  --secondary-foreground: oklch(0.96 0.005 60);
+  --muted: oklch(0.22 0.02 150);
+  --muted-foreground: oklch(0.70 0.02 150);
+  --accent: oklch(0.70 0.16 75);
+  --accent-foreground: oklch(0.13 0.015 280);
+  /* Amarillo quemado saturado — para textos de acento pequeños
+     que deben resaltar sobre el fondo oscuro obsidiana */
+  --highlight: oklch(0.78 0.17 68);
+  --destructive: oklch(0.60 0.25 25);
   --border: oklch(1 0 0 / 8%);
   --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.70 0.135 60);
-
-  --chart-1: oklch(0.70 0.135 60);             /* terracota */
-  --chart-2: oklch(0.60 0.080 150);            /* verde oliva */
-  --chart-3: oklch(0.55 0.090 250);            /* azul pizarra */
-  --chart-4: oklch(0.75 0.150 30);             /* naranja terracota claro */
-  --chart-5: oklch(0.65 0.060 30);             /* marrón tierra */
-
-  --sidebar: oklch(0.22 0.010 60);
-  --sidebar-foreground: oklch(0.96 0.015 75);
-  --sidebar-primary: oklch(0.70 0.135 60);
-  --sidebar-primary-foreground: oklch(0.18 0.008 60);
-  --sidebar-accent: oklch(0.30 0.010 60);
-  --sidebar-accent-foreground: oklch(0.96 0.015 75);
+  --ring: oklch(0.55 0.20 25 / 60%);
+  --chart-1: oklch(0.55 0.20 25);
+  --chart-2: oklch(0.55 0.13 150);
+  --chart-3: oklch(0.45 0.20 320);
+  --chart-4: oklch(0.70 0.16 75);
+  --chart-5: oklch(0.30 0.10 250);
+  --sidebar: oklch(0.17 0.018 280);
+  --sidebar-foreground: oklch(0.96 0.005 60);
+  --sidebar-primary: oklch(0.55 0.20 25);
+  --sidebar-primary-foreground: oklch(0.98 0.005 60);
+  --sidebar-accent: oklch(0.22 0.02 280);
+  --sidebar-accent-foreground: oklch(0.96 0.005 60);
   --sidebar-border: oklch(1 0 0 / 8%);
-  --sidebar-ring: oklch(0.70 0.135 60);
+  --sidebar-ring: oklch(0.55 0.20 25 / 60%);
 }
 
-/* ---------- Tema claro (no default) ---------- */
 .dark {
-  --background: oklch(0.18 0.008 60);
-  --foreground: oklch(0.96 0.015 75);
-  --card: oklch(0.22 0.010 60);
-  --card-foreground: oklch(0.96 0.015 75);
-  --popover: oklch(0.22 0.010 60);
-  --popover-foreground: oklch(0.96 0.015 75);
-  --primary: oklch(0.70 0.135 60);
-  --primary-foreground: oklch(0.18 0.008 60);
-  --secondary: oklch(0.30 0.010 60);
-  --secondary-foreground: oklch(0.96 0.015 75);
-  --muted: oklch(0.26 0.008 60);
-  --muted-foreground: oklch(0.70 0.015 75);
-  --accent: oklch(0.40 0.020 70);
-  --accent-foreground: oklch(0.96 0.015 75);
-  --destructive: oklch(0.65 0.220 25);
+  --background: oklch(0.13 0.015 280);
+  --foreground: oklch(0.96 0.005 60);
+  --card: oklch(0.17 0.018 280);
+  --card-foreground: oklch(0.96 0.005 60);
+  --popover: oklch(0.17 0.018 280);
+  --popover-foreground: oklch(0.96 0.005 60);
+  --primary: oklch(0.55 0.20 25);
+  --primary-foreground: oklch(0.98 0.005 60);
+  --secondary: oklch(0.40 0.18 320);
+  --secondary-foreground: oklch(0.96 0.005 60);
+  --muted: oklch(0.22 0.02 150);
+  --muted-foreground: oklch(0.70 0.02 150);
+  --accent: oklch(0.70 0.16 75);
+  --accent-foreground: oklch(0.13 0.015 280);
+  /* Amarillo quemado saturado — para textos de acento pequeños
+     que deben resaltar sobre el fondo oscuro obsidiana */
+  --highlight: oklch(0.78 0.17 68);
+  --destructive: oklch(0.60 0.25 25);
   --border: oklch(1 0 0 / 8%);
   --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.70 0.135 60);
-  --chart-1: oklch(0.70 0.135 60);
-  --chart-2: oklch(0.60 0.080 150);
-  --chart-3: oklch(0.55 0.090 250);
-  --chart-4: oklch(0.75 0.150 30);
-  --chart-5: oklch(0.65 0.060 30);
-  --sidebar: oklch(0.22 0.010 60);
-  --sidebar-foreground: oklch(0.96 0.015 75);
-  --sidebar-primary: oklch(0.70 0.135 60);
-  --sidebar-primary-foreground: oklch(0.18 0.008 60);
-  --sidebar-accent: oklch(0.30 0.010 60);
-  --sidebar-accent-foreground: oklch(0.96 0.015 75);
+  --ring: oklch(0.55 0.20 25 / 60%);
+  --chart-1: oklch(0.55 0.20 25);
+  --chart-2: oklch(0.55 0.13 150);
+  --chart-3: oklch(0.45 0.20 320);
+  --chart-4: oklch(0.70 0.16 75);
+  --chart-5: oklch(0.30 0.10 250);
+  --sidebar: oklch(0.17 0.018 280);
+  --sidebar-foreground: oklch(0.96 0.005 60);
+  --sidebar-primary: oklch(0.55 0.20 25);
+  --sidebar-primary-foreground: oklch(0.98 0.005 60);
+  --sidebar-accent: oklch(0.22 0.02 280);
+  --sidebar-accent-foreground: oklch(0.96 0.005 60);
   --sidebar-border: oklch(1 0 0 / 8%);
-  --sidebar-ring: oklch(0.70 0.135 60);
+  --sidebar-ring: oklch(0.55 0.20 25 / 60%);
 }
 
 @layer base {
@@ -147,40 +134,102 @@
     font-feature-settings: "ss01", "cv01", "cv11";
   }
 
-  /* Tipografía display (títulos) */
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-montserrat), sans-serif;
-    letter-spacing: -0.02em;
+    font-family: var(--font-outfit), sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.025em;
   }
 
-  /* Body usa Poppins por defecto (variable --font-poppins) */
   body, p, span, div, button, input, select, textarea, a, label, li {
-    font-family: var(--font-poppins), sans-serif;
+    font-family: var(--font-outfit), sans-serif;
   }
 }
 
 /* ============================================================
-   Utilidades específicas de Macumba
-   ============================================================*/
+   Animaciones y utilidades MACUMBA
+   ============================================================ */
 
-/* Texto con gradiente terracota → arena */
+@keyframes gradient-bg {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-art-mesh {
+  background: linear-gradient(
+    -45deg,
+    #0d0b12,
+    #1d0d21,
+    #0f1f1a,
+    #210c11,
+    #0d0b12
+  );
+  background-size: 400% 400%;
+  animation: gradient-bg 18s ease infinite;
+}
+
+@keyframes aura-pulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: translate(-50%, 0) scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(-50%, 0) scale(1.08);
+  }
+}
+
+.animate-aura {
+  animation: aura-pulse 6s ease-in-out infinite;
+}
+
 .text-gradient-macumba {
   background: linear-gradient(
     135deg,
-    oklch(0.75 0.155 60) 0%,
-    oklch(0.85 0.080 75) 100%
+    oklch(0.65 0.22 25) 0%,
+    oklch(0.55 0.20 320) 50%,
+    oklch(0.75 0.18 75) 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-/* Borde sutil terroso */
-.border-macumba {
-  border-color: oklch(1 0 0 / 8%);
+.glass-card {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 8px 32px 0 rgba(0, 0, 0, 0.37),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
 }
 
-/* Patrón sutil de "tela" para fondos */
+.glass-card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card-hover:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(217, 35, 56, 0.3);
+  box-shadow:
+    0 12px 40px 0 rgba(217, 35, 56, 0.15),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+  transform: translateY(-4px);
+}
+
+.glow-primary {
+  box-shadow:
+    0 0 20px oklch(0.55 0.20 25 / 0.4),
+    0 0 40px oklch(0.55 0.20 25 / 0.2);
+}
+
+.glow-primary:hover {
+  box-shadow:
+    0 0 30px oklch(0.55 0.20 25 / 0.6),
+    0 0 60px oklch(0.55 0.20 25 / 0.3);
+}
+
 .bg-fabric-pattern {
   background-image:
     radial-gradient(circle at 25% 25%, oklch(1 0 0 / 2%) 1px, transparent 1px),
@@ -189,24 +238,44 @@
   background-position: 0 0, 12px 12px;
 }
 
-/* Scrollbar personalizada tema oscuro */
+.bg-art-pattern {
+  background-image:
+    radial-gradient(circle at 20% 30%, oklch(0.55 0.20 25 / 8%) 0, transparent 50%),
+    radial-gradient(circle at 80% 70%, oklch(0.55 0.20 320 / 8%) 0, transparent 50%),
+    radial-gradient(circle at 50% 50%, oklch(0.70 0.16 75 / 5%) 0, transparent 60%);
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: oklch(0.18 0.008 60);
+  background: oklch(0.13 0.015 280);
 }
 ::-webkit-scrollbar-thumb {
-  background: oklch(0.30 0.010 60);
+  background: linear-gradient(
+    180deg,
+    oklch(0.55 0.20 25 / 60%),
+    oklch(0.40 0.18 320 / 60%)
+  );
   border-radius: 5px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: oklch(0.40 0.020 70);
+  background: linear-gradient(
+    180deg,
+    oklch(0.55 0.20 25 / 90%),
+    oklch(0.40 0.18 320 / 90%)
+  );
 }
 
-/* Selection color */
 ::selection {
-  background: oklch(0.70 0.135 60 / 30%);
-  color: oklch(0.96 0.015 75);
+  background: oklch(0.55 0.20 25 / 35%);
+  color: oklch(0.98 0.005 60);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-art-mesh,
+  .animate-aura {
+    animation: none !important;
+  }
 }
