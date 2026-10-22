@@ -37,3 +37,18 @@ Stage Summary:
 - Flujo visualizado en 4 pantallas con paleta Selva Viva (crema #F7F3E9, morado #5B2A86 CTAs, verde selva #1E5631, magenta badges)
 - Flujo UX: Canasta (2 items, total, CTA morado) → Datos de entrega (3 pasos: Canasta/Entrega/WhatsApp, contra entrega) → Confirmación + chat WhatsApp (pedido MB-1042 + receta JSON) → versión móvil para ferias
 - Script reutilizable para regenerar pantallas: node scripts/generar-flujo-compra.mjs 01,02
+
+---
+Task ID: 2
+Agent: Z.ai (main agent)
+Task: Simplificación y mejora de las mockups de confirmación WhatsApp (03 y 04) según feedback del usuario
+
+Work Log:
+- Feedback: "las de confirmación por WhatsApp no están bn, simplificar y mejorar"
+- Editado scripts/generar-flujo-compra.mjs: 03 rediseñada (split web+teléfono → página de confirmación desktop con tarjeta chat-preview; timeline 5 pasos → 3; sin líneas de texto secundarias); 04 simplificada (badge sin texto, chat reducido a 2 burbujas + foto, "EXACTLY TWO phones")
+- 3 iteraciones para 03 (eliminar subline que garbateaba, orthography EXACT) y 2 para 04 (composición de 2 teléfonos)
+
+Stage Summary:
+- 03-confirmacion-whatsapp.png v3: check verde + "¡Pedido enviado!" + chip MB-1042 + timeline Recibido/Producción/Enviado + tarjeta chat "Macumba Shop" con Total y botón "Abrir WhatsApp" — todo legible
+- 04-movil-feria.png v5: dos teléfonos exactos, formato $280.000 correcto, chat minimal (Nuevo pedido / Total / foto / ¡Recibido!)
+- Lección aplicada: menos palabras por pantalla = menos garbling del modelo de imagen; reutilizable para futuras pantallas

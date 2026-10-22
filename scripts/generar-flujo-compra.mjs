@@ -38,20 +38,23 @@ Right: white summary card with two small garment photo thumbnails (green hand-pa
   {
     name: '03-confirmacion-whatsapp.png',
     size: '1344x768',
-    prompt: `Split marketing composition, wide landscape: LEFT 62% a website order-confirmation page inside a Google Chrome browser window (URL macumbashop.co/pedido/MB-1042); RIGHT 38% a modern smartphone mockup slightly tilted showing a WhatsApp Business chat. Both on a warm cream studio background with subtle tropical leaf shadows. Brand: MACUMBA SHOP, artisanal Colombian fashion (recycled textiles, hand-painted art).
+    prompt: `Photorealistic website UI design mockup inside a Google Chrome desktop browser window (address bar with URL macumbashop.co/pedido), 1440x900 viewport. Order confirmation page for MACUMBA SHOP, artisanal Colombian fashion brand (recycled textiles, hand-painted art). Keep ALL text minimal, short and perfectly legible, very large typography, lots of whitespace.
 
-WEBSITE (left) ${DS} — content: big forest-green circle with white check mark; serif headline '¡Tu pedido está en camino!'; subtext 'Abrimos WhatsApp con tu pedido listo. Solo presiona enviar.'; purple chip 'Pedido MB-1042'; small white card with two garment photo thumbnails (hand-painted green jacket, caramel coat) and purple total '$500.000'; horizontal status timeline with five embroidered diamond icons: 'Recibido' filled purple, then 'Contactado', 'Confirmado', 'En producción', 'Enviado' outlined pistachio; footer caption 'Te avisamos por WhatsApp cuando tu pieza esté lista — Robert'.
+${DS}
 
-PHONE (right): WhatsApp Business chat with green header 'Macumba Shop · en línea'; white incoming message bubble with structured order text: bold 'NUEVO PEDIDO · MB-1042', lines '1× Cazadora Selva Profunda · Talla M · $280.000', '1× Abrigo Raíces · Talla L · $220.000', 'Total: $500.000', 'Pago: contra entrega', 'Dirección: Chapinero, Bogotá'; two small attached preview photos of the painted jacket front and back; one green document chip 'MB-1042-receta.json'; below, a reply bubble from Macumba Shop: '¡Hola! Recibimos tu pedido, te confirmamos hoy mismo.' Photorealistic UI render, dribbble quality, high quality, detailed.`
+LAYOUT: two clean columns.
+LEFT column, vertically centered: large forest-green circle with a white check mark; big serif headline '¡Pedido enviado!'; below it one small purple pill chip with text 'MB-1042'; below, a horizontal 3-step timeline with embroidered diamond icons connected by a dotted line: first diamond filled purple labeled 'Recibido', second diamond pistachio outline labeled 'Producción', third diamond pistachio outline labeled 'Enviado'.
+RIGHT column: ONE white chat-preview card with rounded corners: green rounded header bar with white text 'Macumba Shop'; inside, a small photo thumbnail of a forest-green jacket with hand-painted purple and magenta jungle art, next to it the short bold text 'Total $500.000' and the line 'Contra entrega'; below, one large purple rounded button with white WhatsApp logo and label 'Abrir WhatsApp'.
+All Spanish text must be spelled EXACTLY as given, no invented words. NO other small text anywhere. ${NOAPP}`
   },
   {
     name: '04-movil-feria.png',
     size: '1024x1024',
-    prompt: `Composition with two modern smartphone mockups side by side on a warm cream background #F7F3E9 with soft botanical leaf shadows, showcasing the MOBILE WEBSITE of MACUMBA SHOP, artisanal Colombian fashion brand (recycled textiles, hand-painted art). Both phones show a web browser (small address bar at top), NOT a native app.
+    prompt: `Composition with EXACTLY TWO modern smartphone mockups side by side, centered with generous margins, on a warm cream background #F7F3E9 with soft botanical leaf shadows, showcasing the MOBILE WEBSITE of MACUMBA SHOP, artisanal Colombian fashion brand (recycled textiles, hand-painted art). Only two phones in the whole image, nothing cut off at the edges. Keep ALL text minimal, short and perfectly legible, very large typography.
 
-LEFT PHONE: mobile shopping cart page: cream background, serif heading 'Tu Canasta', white card with photo of a forest-green recycled jacket with hand-painted purple and magenta jungle art, tiny magenta badge 'Pieza Única', purple price '$280.000', quantity stepper, purple page-level button with WhatsApp logo 'Finalizar por WhatsApp', small caption 'Contra entrega · coordinamos por WhatsApp'.
+LEFT PHONE: a mobile web browser (small address bar at top, NOT a native app): cream background page, serif heading 'Tu Canasta', ONE white card with a photo of a forest-green recycled jacket with hand-painted purple and magenta jungle art and a small blank purple ribbon badge without any text, big purple price '$280.000', one large purple button with WhatsApp logo and short label 'Finalizar', small caption 'Contra entrega'.
 
-RIGHT PHONE: WhatsApp Business chat with 'Macumba Shop': incoming white bubble with order text 'NUEVO PEDIDO · MB-1042', item lines with prices, 'Total: $500.000', 'Pago: contra entrega', one attached preview photo of the painted jacket, and a reply bubble from the shop '¡Recibimos tu pedido! Te confirmamos hoy.'
+RIGHT PHONE: WhatsApp chat with dark green header 'Macumba Shop': ONE white incoming message bubble with short bold text 'Nuevo pedido' and one line 'Total $500.000'; below the bubble one attached photo of the painted green jacket; then ONE light-green reply bubble with only the word '¡Recibido!'. Nothing else. All Spanish text must be spelled EXACTLY as given.
 
 ${DS} Photorealistic device mockups, dribbble-quality UI presentation, high quality, detailed.`
   }
