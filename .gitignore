@@ -61,3 +61,18 @@ db/*.db-journal
 Thumbs.db
 # permitir el ejemplo de env
 !.env.example
+
+# artefactos de trabajo local (no van al repo)
+/download
+/upload
+/.zscripts
+/tests
+/examples
+/mini-services
+/worklog.md
+/Caddyfile
+/CLAUDE.md
+/bun.lock
+/--full=false
+/dev.log
+/server.log
