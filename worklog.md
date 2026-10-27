@@ -149,3 +149,21 @@ Stage Summary:
 - Paquete pasarela completo en download/macumba-pasarela/: 6 stills + desfile-completo.mp4 (hero) + clips/ (6 clips individuales 5s) + _ia-referencia/
 - Arte pintado 100% estable en todo el material (Ken Burns, sin IA de video)
 - Siguiente: mockups La Sala (slider continuo + ficha rápida) y El Estudio (ghost mannequin), luego integración al código Fase 1
+
+---
+Task ID: 8
+Agent: Z.ai (main agent)
+Task: Mockups Selva Viva — La Sala (embudo de 3 vistas) + El Estudio (ghost mannequin)
+
+Work Log:
+- Asset clave generado con image-edit directo (scripts/ghost-mannequin.mjs, 1 intento): cazadora roja flotante sin cuerpo estilo maniquí invisible (cuello formado, mangas llenas, sombra suave, fondo blanco) a partir de 01-roja-frente.png → download/macumba-mockups/assets/ghost-roja.png; valida el flujo "foto real → lienzo" del Estudio
+- index.html con 5 láminas (download/macumba-mockups/): 01 slider continuo desktop (tinta + textura, prendas laterales asomando, ficha flotante, progreso), 02 slider móvil (teléfono, pantalla completa, "una grilla que encoges" corregido), 03 ficha rápida (sheet derecho con foto+badge pieza única, tallas, CTA, salida al catálogo), 04 catálogo estático (nav, filtros, grid 5 piezas + CTA Estudio + 2 "En el taller", hover demo), 05 Estudio ghost mannequin (lienzo con badge paso 2/4, foto "antes"→lienzo, 4 pasos con bloqueo progresivo, resumen $480.000, 3 notas al pie)
+- Stills de pasarela copiadas como assets/pasarela-01..06.png; nombres reales de piezas (Selva Roja, Black Inspiration, Asian Soul, Alma Dorada, Espíritu León); precios de referencia con nota "por confirmar"
+- Render con Playwright device_scale_factor=2 (scripts/render_mockups.py, env SOLO= para regenerar láminas sueltas)
+- QA iterativo: L1 ficha bajada al hem (tapaba la chaqueta) + nowrap "Toca la prenda → ficha"; L2 precio nowrap + chip LA SALA con fondo + gramática "una grilla"; L4 chip "Personalizables · El Estudio"; L5 badge centrado (el arco lo recortaba), etiqueta "antes" acortada y "arrastra para girar" movida a la esquina inferior derecha (colisión resuelta)
+- Nota: MultiEdit resultó NO atómico en esta sesión (aplicó el primer edit y falló el resto) → verificación por Grep y edits individuales tras el incidente
+
+Stage Summary:
+- 5 PNG finales en download/macumba-mockups/ + index.html (especificación viva del embudo Sala y del lienzo del Estudio)
+- El ghost mannequin queda probado como asset doble (lienzo Fabric.js + foto "antes") — requiere del cliente fotos con ángulo lateral e interior de cuello por pieza
+- Siguiente: aprobación del cliente → integración en Fase 1 (hero video pasarela, la-sala slider, taller → Estudio)
