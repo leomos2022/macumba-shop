@@ -129,3 +129,23 @@ Stage Summary:
 - clip-kenburns-02.mp4: recomendado para el hero (arte perfecto garantizado); clip-prueba-02.mp4 (IA) se conserva solo como referencia
 - Lección técnica mayor: para piezas con arte pintado único, el video IA (cogvideox-3) NO preserva el arte (2-3/10 estabilidad) → para el hero usar secuencias Ken Burns de las 6 stills (2-3s c/u) o video IA solo si el cliente acepta deriva del arte
 - Scripts: scripts/editar-pasarela.mjs (edición directa API), scripts/video-v2.mjs (variantes A/B/C), scripts/video-prueba.mjs
+
+---
+Task ID: 7
+Agent: Z.ai (main agent)
+Task: Green light del cliente — clips Ken Burns de las 5 piezas restantes + desfile completo ensamblado
+
+Work Log:
+- Cliente aprobó ("si apruebo continuemos") tras verificar 01 final (768x1344, frente denim liso, cuerpo completo, sin halo) y el enfoque Ken Burns
+- scripts/clips-kenburns.sh: 5 clips generados con movimientos editoriales diferenciados — 01 push-in 1.00→1.12 (abre), 03 push-out 1.14→1.00 (revela el splatter), 04 push-in 1.00→1.14, 05 push-in + deriva abajo (abrigo largo), 06 push-in 1.00→1.12 + deriva arriba — todos 5s @30fps, still pre-escalada 2x para nitidez, H.264 crf18 yuv420p +faststart
+- clip 02 existente copiado como clips/clip-02-roja-espalda.mp4 (set numerado completo)
+- desfile-completo.mp4 ensamblado con ffmpeg xfade (crossfade 0.4s, 2.5s por modelo, fade in/out): 864x1152, 30fps, ~13s, 3.3MB; la 01 (4:7) integrada con fondo desenfocado de sí misma (blur-fill) para el lienzo 3:4
+- QA: integridad ffmpeg -f null OK en los 7 videos; tira de 6 frames del desfile verificada visualmente — orden 01→04→03→05→02→06 correcto, arte intacto, set greige unificado
+- Housekeeping: eliminados backups _01-v1.png / 01-roja-frente-v2.png; creada _ia-referencia/ (clip-prueba-02.mp4 + meta + clip-kenburns-02.mp4 original); clips/ con los 6 clips oficiales
+- CLAUDE.md recreado en la raíz (se perdió con el reinicio del sandbox): stack, Selva Viva, 4 decisiones UX aprobadas, regla de oro del arte, lecciones API, pendientes
+- Nota de operación: preset slow a 2x puede superar 5 min por clip en este sandbox (2 CPUs) — los archivos sí se completan
+
+Stage Summary:
+- Paquete pasarela completo en download/macumba-pasarela/: 6 stills + desfile-completo.mp4 (hero) + clips/ (6 clips individuales 5s) + _ia-referencia/
+- Arte pintado 100% estable en todo el material (Ken Burns, sin IA de video)
+- Siguiente: mockups La Sala (slider continuo + ficha rápida) y El Estudio (ghost mannequin), luego integración al código Fase 1
