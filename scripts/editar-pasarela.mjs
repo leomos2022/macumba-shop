@@ -18,10 +18,11 @@ const SET = `Replace ONLY the background with a seamless professional photo-stud
 
 const jobs = [
   {
+    // Frente SIN arte: el frente es denim rojo clásico (corrección del cliente)
     name: '01-roja-frente.png',
     src: '1791573793fda6.png',
-    size: '864x1152',
-    prompt: `Editorial fashion studio photograph. ${KEEP} The model stands facing the camera wearing a hand-painted red denim jacket with a green scarf at the neck. ${SET}`,
+    size: '768x1344',
+    prompt: `Editorial fashion studio photograph. Keep the model, his pose, his face, his hair, his green scarf and his green trousers EXACTLY as in the original photo. The jacket is a classic red denim jacket: REMOVE all painted artwork from the front of the jacket — the front must be plain clean red denim fabric with natural denim texture, seams and stitching only, absolutely no painting, no print, no artwork on the front. Keep the jacket's cut, collar shape, fit and red color identical. Replace ONLY the background with a seamless professional photo-studio backdrop in warm mid-tone greige taupe, smooth soft gradient, completely empty: no objects, no walls, no graffiti, no texture, no people. Lighting: high-end fashion magazine studio lighting, soft key light, clean soft shadow on the floor. Absolutely no glowing halo, no rim glow, no light bloom around the model's silhouette. Wide full-length editorial shot: the entire body visible from head to shoes, both shoes fully visible standing on the studio floor with generous empty space below the shoes. Unified warm editorial color grade across the whole series. Photorealistic editorial fashion photography, sharp focus on the garment. No text, no logos, no watermark.`,
   },
   {
     name: '02-roja-espalda.png',

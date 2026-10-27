@@ -109,3 +109,23 @@ Stage Summary:
 - Entregables en download/macumba-pasarela/: 01-roja-frente.png, 02-roja-espalda.png, 03-black-inspiration.png, 04-asian-soul.png, 05-alma-dorada.png, 06-espiritu-leon.png, clip-prueba-02.mp4 (+meta)
 - Serie lista para: slider de La Sala, clips del hero (pendiente aprobación del cliente para los 5 restantes), fichas estáticas
 - Orden de desfile sugerido: 01 (H frente, abre) → 04 (M) → 03 (H) → 05 (M) → 02 (H espalda) → 06 (M, cierra la pieza más grande)
+
+---
+Task ID: 6
+Agent: Z.ai (main agent)
+Task: Corrección 01 (frente sin arte) + mejora del video de pasarela (anti-warping)
+
+Work Log:
+- Feedback del cliente: el frente de la chaqueta roja es denim clásico SIN estampado (el arte vive solo en la espalda); el video "buen intento pero hay que mejorar"; las demás fotos aprobadas
+- 01 regenerada en 3 iteraciones: v2 media-carta con halo → v3 still halos/spotlight → v4 FINAL (768x1344, cuerpo completo con zapatos, frente denim liso, sin halo). Prompt clave: "REMOVE all painted artwork from the front... plain clean red denim"
+- QA de video con modelo de visión (glm-5v-turbo vía z-ai vision; los videos locales fallan con "图片输入格式/解析错误" → workaround: montaje 3x3 de frames con ffmpeg tile y analizar como imagen)
+- Diagnóstico clip v1 (cogvideox-3): el modelo NO camina (solo se mece), el arte se REDIBUJA cada frame, la tela se derrite
+- Intentos anti-warping: A (micro-movimiento, cámara bloqueada) 3/10; B (429 rate limit persistente, no se generó); C (modelo congelado + dolly) 2/10 — conclusión: cogvideox-3 repinta el arte cada frame sin importar el prompt; limitación del modelo, no del prompt
+- Solución adoptada: clip Ken Burns con ffmpeg zoompan (push-in lento 1.0→1.14, 5s, 30fps, H.264 yuv420p +faststart, 472 KB) sobre la still 02 → arte 100% estable
+- Limpieza: eliminados clips defectuosos v2A/v2C, montajes QA y backups de 01
+
+Stage Summary:
+- 01-roja-frente.png final: frente denim rojo clásico SIN arte, cuerpo completo, set unificado — reemplaza a la anterior
+- clip-kenburns-02.mp4: recomendado para el hero (arte perfecto garantizado); clip-prueba-02.mp4 (IA) se conserva solo como referencia
+- Lección técnica mayor: para piezas con arte pintado único, el video IA (cogvideox-3) NO preserva el arte (2-3/10 estabilidad) → para el hero usar secuencias Ken Burns de las 6 stills (2-3s c/u) o video IA solo si el cliente acepta deriva del arte
+- Scripts: scripts/editar-pasarela.mjs (edición directa API), scripts/video-v2.mjs (variantes A/B/C), scripts/video-prueba.mjs
