@@ -6,7 +6,7 @@ import { HeroSecuencia } from "./hero-secuencia";
 import { LaSala } from "./la-sala";
 import { DetalleProducto } from "./detalle-producto";
 import { CanastaSheet } from "./canasta-sheet";
-import { TallerTeaser } from "./taller-teaser";
+import { Estudio } from "./estudio";
 import { Historia } from "./historia";
 import { Footer } from "./footer";
 import { BotonWhatsAppFlotante } from "./boton-whatsapp";
@@ -42,7 +42,7 @@ export function Tienda({ productos }: { productos: Producto[] }) {
       <main className="flex-1">
         <HeroSecuencia piezas={destacados} onVerDetalle={verDetalle} />
         <LaSala productos={productos} onVerDetalle={verDetalle} />
-        <TallerTeaser />
+        <Estudio />
         <Historia />
       </main>
       <Footer />

@@ -44,6 +44,7 @@
   --color-tinta: var(--tinta);           /* texto verde-negro */
   --color-morado: var(--morado);         /* la reina: CTAs, precios */
   --color-morado-hondo: var(--morado-hondo);
+  --color-morado-clara: var(--morado-clara); /* morado legible sobre tinta */
   --color-verde: var(--verde);           /* verde selva */
   --color-verde-hondo: var(--verde-hondo);
   --color-pistacho: var(--pistacho);     /* acento natural */
@@ -98,6 +99,7 @@
   --tinta: #14281d;
   --morado: #5b2a86;
   --morado-hondo: #471f6b;
+  --morado-clara: #b98ad9;
   --verde: #1e5631;
   --verde-hondo: #14281d;
   --pistacho: #93c572;
@@ -188,5 +190,28 @@
   }
   .tracking-marca {
     letter-spacing: 0.22em;
+  }
+  /* Transición suave del panel editorial al cambiar de segmento del desfile */
+  .cambio-suave {
+    animation: cambioSuave 0.5s ease both;
+  }
+  /* Slider continuo: oculta la barra de scroll */
+  .sin-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .sin-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes cambioSuave {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

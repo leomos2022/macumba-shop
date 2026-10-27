@@ -199,7 +199,7 @@ export function DetalleProducto({ producto, abierto, onCerrar }: Props) {
               <div className="mt-6 rounded-xl border border-verde/20 bg-card p-4">
                 <p className="mb-3 flex items-center gap-2 text-sm font-semibold text-verde">
                   <Rombo className="h-3.5 w-3.5 text-morado" />
-                  Así funcionará El Taller
+                  Así funcionará El Estudio
                 </p>
                 <ol className="space-y-2 text-sm text-tinta/80">
                   <li>1 · Eliges tu silueta y color base</li>
@@ -213,7 +213,7 @@ export function DetalleProducto({ producto, abierto, onCerrar }: Props) {
                 disabled
                 className="mt-5 h-12 w-full rounded-full bg-morado/40 text-base font-semibold"
               >
-                Pronto en El Taller
+                Pronto en El Estudio
               </Button>
             </>
           )}

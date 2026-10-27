@@ -16,7 +16,7 @@ import { urlWhatsApp } from "@/lib/macumba";
 const NAV = [
   { href: "#inicio", label: "Inicio" },
   { href: "#la-sala", label: "La Sala" },
-  { href: "#el-taller", label: "El Taller" },
+  { href: "#el-estudio", label: "El Estudio" },
   { href: "#historia", label: "Historia" },
 ];
 

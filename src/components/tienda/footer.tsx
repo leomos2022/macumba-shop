@@ -32,7 +32,7 @@ export function Footer() {
             {[
               ["#inicio", "Inicio"],
               ["#la-sala", "La Sala"],
-              ["#el-taller", "El Taller"],
+              ["#el-estudio", "El Estudio"],
               ["#historia", "Historia"],
             ].map(([href, label]) => (
               <li key={href}>

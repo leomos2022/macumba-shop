@@ -182,3 +182,24 @@ Work Log:
 Stage Summary:
 - Estudio con lienzo cuadrado radio 10px; pendiente de confirmación si el cliente quiere extender el estilo cuadrado a otras vistas
 - Siguiente: integración en Fase 1 al confirmar
+
+---
+Task ID: 10
+Agent: Z.ai (main agent)
+Task: Integración Fase 1 — mockups aprobados al código (hero video, La Sala slider, El Estudio)
+
+Work Log:
+- Assets a public/tienda/: desfile-completo.mp4, pasarela-01..06.png, ghost-roja.png, antes-roja.png (redimensionada a 320px/≈170KB con PIL tras problemas del PNG de ffmpeg con el optimizer)
+- seed.ts → 5 piezas únicas reales (Selva Roja $420k, Asian Soul $460k, Black Inspiration $390k, Alma Dorada $520k, Espíritu León $480k — precios de referencia) + 4 personalizables; DB re-seeded (9 productos)
+- hero-secuencia.tsx reescrito: video desfile (Ken Burns, 12.97s) en marco-arco con panel editorial SINCRONIZADO por timeupdate (6 segmentos, fronteras 2.3/4.4/6.5/8.6/10.7 → orden 01→04→03→05→02→06; segmento 5 = "Selva Roja · el arte por detrás"), dots que buscan segmento, play/pause, etiqueta de modelo sobre el video, autoplay resiliente con reintento en rAF (respeta prefers-reduced-motion)
+- la-sala.tsx reescrito con embudo 3 niveles: Nivel 1 SliderContinuo (fondo tinta, snap-x scroll nativo + scrollIntoView center, arcos, slides laterales opacity 40, ficha flotante con badge/serie/precio/CTA "Ver la ficha", flechas + teclado + progreso pistacho, salida al catálogo) → Nivel 2 DetalleProducto existente (ficha rápida sheet) → Nivel 3 grid estático con filtros (id la-sala-catalogo); scroll-mt-16 en ambas secciones
+- estudio.tsx nuevo (reemplaza taller-teaser.tsx): lienzo ghost mannequin CUADRADO radio 10px (feedback del cliente), badge "Paso 2 de 4 · Color", thumb "Tu foto real" → lienzo, hint "Arrastra para girar (muy pronto)" solo ≥sm (colisión móvil resuelta), 4 pasos con estados (Silueta LISTA con chips que cambian precio base 420k/520k/460k, Color ELIGIENDO con 5 swatches, Técnica/Arte BLOQUEADA), resumen dinámico base+$60.000, CTA "Empezar mi prenda" → WhatsApp con selección incluida, 3 notas al pie
+- Consistencia: nav header/footer "El Estudio" (#el-estudio), detalle-producto "Así funcionará El Estudio", precio tarjeta sin nowrap en móvil (overflow "Desde $450.000" resuelto), tokens CSS nuevos --morado-clara + animación cambio-suave + utilidad sin-scrollbar
+- QA agent-browser: video 12.97s playing + sync correcto en cada segmento, slider navegable (flechas/dots/teclado), ficha rápida abre, añadir a canasta persiste (Asian Soul talla S en localStorage), filtros grid OK, silueta actualiza precio, CTA wa.me con mensaje estructurado, móvil (iPhone 14): hero/slider/estudio OK, footer sticky OK, lint limpio
+- Incidentes resueltos: (1) dev server viejo (PID 1175 del 17:30) con optimizer de imágenes en estado tóxico — /_next/image colgaba indefinidamente en la transformación webp de antes-roja.png (curl sin Accept respondía 200, con Accept colgaba; sharp directo funcionaba) → matado árbol completo + arranque limpio → webp 200 en 9ms; (2) warning hidratación radix aria-controls: pre-existente, cosmético, sin acción
+
+Stage Summary:
+- Fase 1 INTEGRADA: hero video desfile + La Sala slider continuo→ficha→catálogo + El Estudio ghost mannequin, todo con las 5 piezas reales y Selva Viva
+- QA en download/qa/int-01..11 (desktop + móvil)
+- Pendiente cliente: WhatsApp oficial, precios reales, fotos ghost mannequin multi-ángulo, textos finales
+- Siguiente: Fase 2 (Fabric.js en El Estudio) tras confirmación del cliente
