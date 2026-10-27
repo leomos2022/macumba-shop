@@ -52,3 +52,24 @@ Stage Summary:
 - 03-confirmacion-whatsapp.png v3: check verde + "¡Pedido enviado!" + chip MB-1042 + timeline Recibido/Producción/Enviado + tarjeta chat "Macumba Shop" con Total y botón "Abrir WhatsApp" — todo legible
 - 04-movil-feria.png v5: dos teléfonos exactos, formato $280.000 correcto, chat minimal (Nuevo pedido / Total / foto / ¡Recibido!)
 - Lección aplicada: menos palabras por pantalla = menos garbling del modelo de imagen; reutilizable para futuras pantallas
+
+---
+Task ID: 3
+Agent: Z.ai (main agent)
+Task: Fase 1 — Inicio + Catálogo "La Sala" funcionando (Next.js 16, design system Selva Viva)
+
+Work Log:
+- Init fullstack (Next.js 16 + shadcn/ui + Prisma/SQLite + Zustand + sonner)
+- Copiados 13 assets fotográficos existentes a public/tienda/ (reutilización, no regeneración)
+- prisma/schema.prisma: modelo Product (slug, category, gender, kind 'unica'|'personalizable', basePrice COP, sizes, technique, material, imageUrl, heroImageUrl, serieLabel, isFeatured, sortOrder) + db:push
+- scripts/seed.ts: 8 productos (4 piezas únicas: Jaguar/Raíces/Colibrí/Orquídea; 4 personalizables de El Taller)
+- globals.css: tokens Selva Viva (--morado #5B2A86 primary, --verde #1E5631, --pistacho, --badge #C2186B, --crema #F7F3E9, --tinta #14281D) + utilidades textura-tejido/marco-arco/font-display
+- layout.tsx: lang es, Fraunces (display) + Outfit (sans) vía next/font, metadata es_CO, Toaster sonner
+- Componentes en src/components/tienda/: header (badge canasta + menú móvil Sheet), hero-secuencia (autoplay 5.5s, pausa hover/focus, prefers-reduced-motion, dots+arrows, marco arco), la-sala (filtros categoría/género, grid denso, overlay hover/focus-within), detalle-producto (Sheet, tallas, stepper, añadir + toast; personalizables → camino El Taller), canasta-sheet (items, totales, checkout), taller-teaser (4 pasos con siluetas), historia (Viste Arte), footer (mt-auto), boton-whatsapp flotante, rombo/separador
+- stores/canasta.ts: Zustand + persist (skipHydration + rehydrate() en mount, patrón lint-safe); formatoCOP determinista sin Intl (evita hydration mismatch)
+- Todo en ruta única "/" (limitación del sandbox); detalle y canasta como Sheets
+- Lint limpio; E2E con agent-browser: hero autoplay, 8 cards, filtros (Abrigos→2, +Masculino→1), foco activa overlay (opacity 1), añadir→toast, badge persiste, checkout wa.me con mensaje estructurado verificado, menú móvil, footer pegado, sin errores de consola; capturas en download/qa/
+
+Stage Summary:
+- Web Macumba Shop Fase 1 operativa en /: Inicio (secuencia editorial), La Sala (catálogo filtrable con 8 productos desde SQLite), El Taller teaser, Historia, Canasta persistente y checkout por WhatsApp (placeholder 573001234567 hasta tener el número oficial)
+- Pendiente siguiente: Fase 2 (El Tudio personalizador con Fabric.js), números/precios reales del cliente, deploy Vercel

@@ -1,0 +1,192 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+
+  /* ── Selva Viva: tokens de marca ─────────────────────────────── */
+  --color-crema: var(--crema);           /* base 60% — papel */
+  --color-crema-hondo: var(--crema-hondo); /* crema oscuro para chips */
+  --color-tinta: var(--tinta);           /* texto verde-negro */
+  --color-morado: var(--morado);         /* la reina: CTAs, precios */
+  --color-morado-hondo: var(--morado-hondo);
+  --color-verde: var(--verde);           /* verde selva */
+  --color-verde-hondo: var(--verde-hondo);
+  --color-pistacho: var(--pistacho);     /* acento natural */
+  --color-badge: var(--badge);           /* magenta: Pieza única */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/*
+ * Paleta "Selva Viva" — Macumba Shop
+ * Regla 60-30-10: crema (60) · verdes (30) · morado (10, acción)
+ */
+:root {
+  --radius: 0.75rem;
+
+  --background: #f7f3e9;
+  --foreground: #14281d;
+  --card: #ffffff;
+  --card-foreground: #14281d;
+  --popover: #ffffff;
+  --popover-foreground: #14281d;
+  --primary: #5b2a86;
+  --primary-foreground: #f7f3e9;
+  --secondary: #1e5631;
+  --secondary-foreground: #f7f3e9;
+  --muted: #efe8d8;
+  --muted-foreground: #5c6b5e;
+  --accent: #93c572;
+  --accent-foreground: #14281d;
+  --destructive: #b3261e;
+  --border: #e3dcc9;
+  --input: #e3dcc9;
+  --ring: #5b2a86;
+  --chart-1: #5b2a86;
+  --chart-2: #1e5631;
+  --chart-3: #93c572;
+  --chart-4: #c2186b;
+  --chart-5: #f7f3e9;
+  --sidebar: #f7f3e9;
+  --sidebar-foreground: #14281d;
+  --sidebar-primary: #5b2a86;
+  --sidebar-primary-foreground: #f7f3e9;
+  --sidebar-accent: #efe8d8;
+  --sidebar-accent-foreground: #14281d;
+  --sidebar-border: #e3dcc9;
+  --sidebar-ring: #5b2a86;
+
+  --crema: #f7f3e9;
+  --crema-hondo: #efe8d8;
+  --tinta: #14281d;
+  --morado: #5b2a86;
+  --morado-hondo: #471f6b;
+  --verde: #1e5631;
+  --verde-hondo: #14281d;
+  --pistacho: #93c572;
+  --badge: #c2186b;
+}
+
+.dark {
+  --background: #14281d;
+  --foreground: #f7f3e9;
+  --card: #1e5631;
+  --card-foreground: #f7f3e9;
+  --popover: #14281d;
+  --popover-foreground: #f7f3e9;
+  --primary: #93c572;
+  --primary-foreground: #14281d;
+  --secondary: #5b2a86;
+  --secondary-foreground: #f7f3e9;
+  --muted: #1e5631;
+  --muted-foreground: #b9c4b9;
+  --accent: #5b2a86;
+  --accent-foreground: #f7f3e9;
+  --destructive: #e57373;
+  --border: #2a3f30;
+  --input: #2a3f30;
+  --ring: #93c572;
+  --chart-1: #93c572;
+  --chart-2: #5b2a86;
+  --chart-3: #1e5631;
+  --chart-4: #c2186b;
+  --chart-5: #f7f3e9;
+  --sidebar: #14281d;
+  --sidebar-foreground: #f7f3e9;
+  --sidebar-primary: #93c572;
+  --sidebar-primary-foreground: #14281d;
+  --sidebar-accent: #1e5631;
+  --sidebar-accent-foreground: #f7f3e9;
+  --sidebar-border: #2a3f30;
+  --sidebar-ring: #93c572;
+
+  --crema: #14281d;
+  --crema-hondo: #1e5631;
+  --tinta: #f7f3e9;
+  --morado: #b98ad9;
+  --morado-hondo: #5b2a86;
+  --verde: #93c572;
+  --verde-hondo: #14281d;
+  --pistacho: #93c572;
+  --badge: #e35ca3;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "liga" 1, "kern" 1;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--pistacho) 55%, transparent);
+    color: var(--tinta);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer utilities {
+  /* Textura sutil de tejido sobre fondos crema (5–8% opacidad) */
+  .textura-tejido {
+    background-image: url("/tienda/textura-tejido.png");
+    background-repeat: repeat;
+    background-size: 480px;
+    background-blend-mode: multiply;
+  }
+  /* Marco de arco para fotos editoriales */
+  .marco-arco {
+    border-radius: 999px 999px 1.5rem 1.5rem;
+  }
+  /* Tipografía display */
+  .font-display {
+    font-family: var(--font-fraunces), Georgia, serif;
+  }
+  .tracking-marca {
+    letter-spacing: 0.22em;
+  }
+}
