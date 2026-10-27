@@ -128,7 +128,7 @@ function SliderContinuo({
             <article
               key={p.slug}
               aria-hidden={i !== activo}
-              className={`marco-arco relative shrink-0 snap-center overflow-hidden border border-crema/20 bg-crema-hondo transition-all duration-500 ease-out w-[64vw] max-w-[300px] sm:w-[340px] lg:w-[380px] ${
+              className={`rounded-[10px] relative shrink-0 snap-center overflow-hidden border border-crema/20 bg-crema-hondo transition-all duration-500 ease-out w-[64vw] max-w-[300px] sm:w-[340px] lg:w-[380px] ${
                 i === activo
                   ? "opacity-100 shadow-[0_40px_90px_rgba(0,0,0,0.55)]"
                   : "cursor-pointer opacity-40 hover:opacity-60"

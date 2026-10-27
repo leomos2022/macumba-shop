@@ -222,3 +222,22 @@ Stage Summary:
 - Número real activo en toda la tienda (wa.me, footer, CTA canasta) sin cambiar arquitectura
 - Plan de automatización propuesto: n8n self-hosted + WhatsApp Cloud API con Coexistence; integración futura vía /api/pedidos → webhook n8n
 - Siguiente: responder al cliente con el plan y continuar Fase 2 / ajustes
+
+---
+Task ID: 12
+Agent: main
+Task: Eliminar arcos de la presentación de prendas en Inicio (decisión cliente: sin arcos en todo el UI/UX)
+
+Work Log:
+- Cliente: "en el inicio en la presentación de las prendas sigue el arco en la parte superior, elimínalo, no quiero ese arco en el UI/UX"
+- Alcance real: clase .marco-arco (border-radius 999px 999px 1.5rem) usada en 2 componentes del Inicio: hero-secuencia.tsx (marco del video desfile) y la-sala.tsx (slides del slider)
+- globals.css: eliminada la utility .marco-arco por completo
+- hero-secuencia.tsx + la-sala.tsx: marco-arco → rounded-[10px] (mismo radio cuadrado del lienzo Estudio aprobado en Task 9 — consistencia total)
+- Grep verificado: cero referencias a marco-arco/999px/rounded-t-[* en src/
+- QA visual (agent-browser): download/qa/qa-sin-arco-hero.png, qa-sin-arco-la-sala.png, qa-sin-arco-catalogo.png — hero, slider y catálogo todos con esquinas cuadradas 10px, badges "Pieza única" bien posicionados
+- CLAUDE.md: motivo "marcos de arco" marcado ELIMINADO en Design System Selva Viva (rombo + textura tejido permanecen)
+
+Stage Summary:
+- El motivo arco quedó retirado de TODA la UI viva (hero, La Sala, catálogo, Estudio); lenguaje visual unificado: tarjetas cuadradas 10px
+- Rombo del bordado sigue como único motivo de marca en marcos decorativos
+- Decisión de diseño registrada en CLAUDE.md para que futuros componentes no reintroduzcan arcos

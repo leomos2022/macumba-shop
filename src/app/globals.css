@@ -180,10 +180,6 @@
     background-size: 480px;
     background-blend-mode: multiply;
   }
-  /* Marco de arco para fotos editoriales */
-  .marco-arco {
-    border-radius: 999px 999px 1.5rem 1.5rem;
-  }
   /* Tipografía display */
   .font-display {
     font-family: var(--font-fraunces), Georgia, serif;

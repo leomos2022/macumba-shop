@@ -215,7 +215,7 @@ export function HeroSecuencia({ piezas, onVerDetalle }: Props) {
 
         {/* ── Video desfile (Ken Burns sobre la pasarela real) ── */}
         <div className="relative order-1 lg:order-2">
-          <div className="marco-arco relative mx-auto aspect-[3/4] w-full max-w-md overflow-hidden border border-border/60 bg-crema-hondo shadow-[0_30px_60px_-30px_rgba(20,40,29,0.45)] lg:max-w-lg">
+          <div className="rounded-[10px] relative mx-auto aspect-[3/4] w-full max-w-md overflow-hidden border border-border/60 bg-crema-hondo shadow-[0_30px_60px_-30px_rgba(20,40,29,0.45)] lg:max-w-lg">
             <video
               ref={videoRef}
               poster="/tienda/pasarela-01.png"

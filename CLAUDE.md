@@ -14,7 +14,7 @@ Venta por WhatsApp sin pasarela de pagos (contra entrega). Idioma del proyecto: 
 
 - Paleta: crema `#F7F3E9` (60%) · verde selva `#1E5631` + pistacho `#93C572` (30%) · morado `#5B2A86` (10%, solo acción) · magenta `#C2186B` (micro-acentos) · tinta `#14281D`
 - Tipografías: Fraunces (display) + Outfit (UI)
-- Motivos: rombo del bordado (SVG), marcos de arco, textura de tejido
+- Motivos: rombo del bordado (SVG), textura de tejido. ❌ Marcos de arco ELIMINADOS (decisión cliente oct 2026: "no quiero ese arco en el UI/UX") — toda tarjeta de prenda usa esquinas cuadradas `rounded-[10px]` (hero desfile, La Sala slider, catálogo, lienzo Estudio)
 - Fondos blancos/estudio en catálogo y Estudio; ambiente selvático solo en Inicio
 - Especificación viva: `download/macumba-design-system/index.html`
 
