@@ -91,3 +91,21 @@ Stage Summary:
 - Cola de producción pendiente de green light: 6 fotos pasarela (Técnica A) → 1 clip video de prueba → mockups Sala slider + Estudio ghost → update CLAUDE.md
 - Piezas identificadas: 5 únicas (Roja "Selva", Black Inspiration, Asian Soul, Alma Dorada, Espíritu León) y 6 tomas
 - Impacto en Fase 1 existente (código en /): hero de secuencia editorial → video pasarela; la-sala grid → slider continuo; taller-teaser → lienzo ghost mannequin
+
+---
+Task ID: 5
+Agent: Z.ai (main agent)
+Task: Pasarela editorial del Inicio — 6 fotos (Técnica A sobre fotos reales) + clip de video de prueba
+
+Work Log:
+- Cliente aprobó: 5 piezas únicas / 6 tomas (roja denim frente+espalda, black inspiration, asian soul, alma dorada, espíritu león); diseños van en la espalda
+- BUG SDK descubierto: CLI z-ai image-edit envía body {image: string} pero la API exige {images: [{url}]} (skill image-edit lo documenta); scripts/generar-pasarela.mjs (CLI) abandonado → scripts/editar-pasarela.mjs (fetch directo a /images/generations/edit con config de /etc/.z-ai-config, variantes de cuerpo, backoff 429)
+- Técnica A aplicada: KEEP (prenda+arte pixel-identical) + SET (fondo estudio greige cálido unificado, luz key+rim, grade editorial, vertical 864x1152)
+- 6/6 generadas al primer intento; QA visual: 01-04 limpias; 05 y 06 con halo de color alrededor del modelo → regeneradas con "no glowing halo, evenly lit backdrop" y quedaron limpias (backups v1 eliminados)
+- Video: SDK POST /video/generation acepta image_url data-URL local; modelo cogvideox-3; poll /async-result (~2.5 min, quality mode); scripts/video-prueba.mjs
+- Clip de prueba 5s desde 02-roja-espalda: el arte pintado sobrevive intacto a la animación (verificado extrayendo frame con ffmpeg)
+
+Stage Summary:
+- Entregables en download/macumba-pasarela/: 01-roja-frente.png, 02-roja-espalda.png, 03-black-inspiration.png, 04-asian-soul.png, 05-alma-dorada.png, 06-espiritu-leon.png, clip-prueba-02.mp4 (+meta)
+- Serie lista para: slider de La Sala, clips del hero (pendiente aprobación del cliente para los 5 restantes), fichas estáticas
+- Orden de desfile sugerido: 01 (H frente, abre) → 04 (M) → 03 (H) → 05 (M) → 02 (H espalda) → 06 (M, cierra la pieza más grande)
