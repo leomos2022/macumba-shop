@@ -167,3 +167,18 @@ Stage Summary:
 - 5 PNG finales en download/macumba-mockups/ + index.html (especificación viva del embudo Sala y del lienzo del Estudio)
 - El ghost mannequin queda probado como asset doble (lienzo Fabric.js + foto "antes") — requiere del cliente fotos con ángulo lateral e interior de cuello por pieza
 - Siguiente: aprobación del cliente → integración en Fase 1 (hero video pasarela, la-sala slider, taller → Estudio)
+
+---
+Task ID: 9
+Agent: Z.ai (main agent)
+Task: Ajuste feedback cliente — eliminar arco redondo de la card del Estudio
+
+Work Log:
+- Cliente aprueba mockups ("me gusta mucho la idea y como se ve") con 1 cambio: la card del lienzo del Estudio tenía marco en arco (border-radius:320px 320px 22px 22px) → reemplazado por radio mínimo 10px (cuadrado con esquinas suaves) en .est-maniqui (download/macumba-mockups/index.html línea 469)
+- Regenerada solo la lámina afectada: SOLO=05- python scripts/render_mockups.py → 05-estudio-ghost-mannequin.png
+- QA visual: arco eliminado, lienzo cuadrado, ghost/badge/thumbnail "antes"/hint 360 intactos
+- Alcance: solo El Estudio; los arcos del slider de La Sala (foto-arco/slide-lateral/marco-linea) NO se tocaron — son parte del lenguaje del slider que el cliente aprobó
+
+Stage Summary:
+- Estudio con lienzo cuadrado radio 10px; pendiente de confirmación si el cliente quiere extender el estilo cuadrado a otras vistas
+- Siguiente: integración en Fase 1 al confirmar
