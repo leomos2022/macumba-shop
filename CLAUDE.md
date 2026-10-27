@@ -45,5 +45,5 @@ Venta por WhatsApp sin pasarela de pagos (contra entrega). Idioma del proyecto: 
 
 - Mockups: La Sala (slider continuo + ficha) y El Estudio (ghost mannequin) en Selva Viva
 - Integración Fase 1: hero → `desfile-completo.mp4`; la-sala grid → slider continuo; taller-teaser → lienzo ghost
-- Cliente: WhatsApp oficial (placeholder 573001234567), precios reales, fotos ghost mannequin, textos de marca
+- Cliente: precios reales, fotos ghost mannequin, textos de marca. ✅ WhatsApp oficial confirmado: +57 320 495 9889 (env NEXT_PUBLIC_WHATSAPP_NUMBER=573204959889, fallback en macumba.ts; plan automatización: n8n + WhatsApp Cloud API con Coexistence)
 - Fase 2: personalizador Fabric.js · Remanufactura (seguimiento en 3 días)

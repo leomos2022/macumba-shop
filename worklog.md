@@ -203,3 +203,22 @@ Stage Summary:
 - QA en download/qa/int-01..11 (desktop + móvil)
 - Pendiente cliente: WhatsApp oficial, precios reales, fotos ghost mannequin multi-ángulo, textos finales
 - Siguiente: Fase 2 (Fabric.js en El Estudio) tras confirmación del cliente
+
+---
+Task ID: 11
+Agent: main
+Task: Configurar número oficial de WhatsApp (+57 320 495 9889) y definir plan de automatización (n8n / Cloud API)
+
+Work Log:
+- Cliente confirmó número oficial: +57 320 495 9889
+- .env: NEXT_PUBLIC_WHATSAPP_NUMBER=573204959889
+- src/lib/macumba.ts: fallback actualizado de 573001234567 → 573204959889 + nuevo export WHATSAPP_NUMERO_VISIBLE (formatea +57 320 495 9889)
+- src/components/tienda/footer.tsx: usa WHATSAPP_NUMERO_VISIBLE (antes mostraba "+3204959889" ambiguo)
+- CLAUDE.md: pendiente de WhatsApp oficial marcado ✅ con nota de plan de automatización
+- tsc --noEmit limpio en src/ (errores restantes solo en examples/ y skills/, ajenos a la app)
+- Investigación (web): Cloud API Colombia = USD 0.0008 utility/service (1.000 service/mes gratis), USD 0.0125 marketing; Coexistence oficial desde may 2025 (app + API mismo número); n8n tiene nodo nativo WhatsApp Business Cloud (send + trigger)
+
+Stage Summary:
+- Número real activo en toda la tienda (wa.me, footer, CTA canasta) sin cambiar arquitectura
+- Plan de automatización propuesto: n8n self-hosted + WhatsApp Cloud API con Coexistence; integración futura vía /api/pedidos → webhook n8n
+- Siguiente: responder al cliente con el plan y continuar Fase 2 / ajustes
