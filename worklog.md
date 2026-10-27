@@ -73,3 +73,21 @@ Work Log:
 Stage Summary:
 - Web Macumba Shop Fase 1 operativa en /: Inicio (secuencia editorial), La Sala (catálogo filtrable con 8 productos desde SQLite), El Taller teaser, Historia, Canasta persistente y checkout por WhatsApp (placeholder 573001234567 hasta tener el número oficial)
 - Pendiente siguiente: Fase 2 (El Tudio personalizador con Fabric.js), números/precios reales del cliente, deploy Vercel
+
+---
+Task ID: 4
+Agent: Z.ai (main agent)
+Task: Nuevo brief del cliente — pasarela editorial (Inicio), Sala como slider continuo, Estudio estilo ghost mannequin; asesoría antes de ejecutar
+
+Work Log:
+- Recibidas 6 fotos reales de piezas pintadas en upload/: cazadora roja frente+espalda (¿misma pieza? por confirmar), black inspiration (noche Parque 93), asian soul, alma dorada (abrigo largo negro), león denim largo
+- Investigación adworker.ai/tools/ghost-mannequin: input foto principal + ángulo extra opcional + interior de cuello; output prenda 3D sin cuerpo sobre fondo blanco; modos Basic/Standard/Pro, vista 45° IA, batch mode
+- Verificado CLI z-ai: image-edit (-i acepta archivo local, ideal para preservar arte) y video (--image-url soporta image-to-video, 5/10s, primer/último frame, 30/60fps)
+- Referencia John Gress no descargable (el servidor devuelve HTML); el estilo editorial se aplicará por descripción en los prompts
+- Estrategia anti-deriva del arte definida: Técnica A (image-edit sobre fotos del cliente: arte intacto píxel a píxel, solo fondo/luz/grade unificados), Técnica B (cambio de pose a zancada, riesgo de deriva, solo con aprobación), video por image-to-video desde las stills
+- Propuesta entregada al cliente: unificar set editorial (un fondo de estudio, una luz, un grade), formato vertical 2:3 (864x1152), embudo Sala de 3 niveles (slider continuo → ficha rápida → ficha estática SEO con fotos reales), Estudio con ghost mannequin como lienzo Fabric.js (un asset = lienzo + foto "antes")
+
+Stage Summary:
+- Cola de producción pendiente de green light: 6 fotos pasarela (Técnica A) → 1 clip video de prueba → mockups Sala slider + Estudio ghost → update CLAUDE.md
+- Piezas identificadas: 5 únicas (Roja "Selva", Black Inspiration, Asian Soul, Alma Dorada, Espíritu León) y 6 tomas
+- Impacto en Fase 1 existente (código en /): hero de secuencia editorial → video pasarela; la-sala grid → slider continuo; taller-teaser → lienzo ghost mannequin
