@@ -76,3 +76,6 @@ Thumbs.db
 /--full=false
 /dev.log
 /server.log
+
+# zip de entrega servido temporalmente (no va al repo)
+/public/macumba-shop-src.zip
