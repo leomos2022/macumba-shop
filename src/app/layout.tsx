@@ -1,25 +1,42 @@
 import type { Metadata } from "next";
-import { Outfit } from "next/font/google";
+import { Fraunces, Outfit } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";
-import { CartDrawer } from "@/components/cart/CartDrawer";
+import { Toaster } from "@/components/ui/sonner";
+
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: {
-    default: "MÄCUMBA — Ropa artesanal pintada a mano",
-    template: "%s | MÄCUMBA",
-  },
+  title: "Macumba Shop — Viste Arte",
   description:
-    "Ropa artesanal pintada a mano con pinturas textiles de alta durabilidad. Cada prenda es única.",
+    "Ropa de textiles reciclados intervenida a mano por artistas bogotanos. Piezas únicas pintadas y bordadas: chaquetas, abrigos y creaciones hechas a tu manera. Bogotá, Colombia.",
+  keywords: [
+    "Macumba Shop",
+    "ropa reciclada",
+    "moda sostenible Colombia",
+    "pintura textil",
+    "bordado a mano",
+    "piezas únicas",
+    "Bogotá",
+  ],
+  authors: [{ name: "Macumba Shop" }],
+  openGraph: {
+    title: "Macumba Shop — Viste Arte",
+    description:
+      "Textiles reciclados, arte a mano. Piezas únicas desde Bogotá para toda Colombia.",
+    siteName: "Macumba Shop",
+    type: "website",
+    locale: "es_CO",
+  },
 };
 
 export default function RootLayout({
@@ -28,15 +45,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es-CO" suppressHydrationWarning>
+    <html lang="es" suppressHydrationWarning>
       <body
-        className={`${outfit.variable} antialiased bg-background text-foreground min-h-screen flex flex-col`}
+        className={`${fraunces.variable} ${outfit.variable} font-sans antialiased bg-background text-foreground`}
       >
-        <Header />
-        <main className="flex-1 flex flex-col">{children}</main>
-        <Footer />
-        <WhatsAppFloat />
-        <CartDrawer />
+        {children}
+        <Toaster position="top-center" richColors />
       </body>
     </html>
   );
