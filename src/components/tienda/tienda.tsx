@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { Header } from "./header";
-import { HeroSecuencia } from "./hero-secuencia";
+import { HeroReel } from "./hero-reel";
 import { LaSala } from "./la-sala";
 import { DetalleProducto } from "./detalle-producto";
 import { CanastaSheet } from "./canasta-sheet";
 import { Estudio } from "./estudio";
-import { Historia } from "./historia";
+import { Catalogo } from "./catalogo";
 import { Footer } from "./footer";
 import { BotonWhatsAppFlotante } from "./boton-whatsapp";
 import { useCanasta } from "@/stores/canasta";
@@ -40,10 +40,10 @@ export function Tienda({ productos }: { productos: Producto[] }) {
 
       <Header />
       <main className="flex-1">
-        <HeroSecuencia piezas={destacados} onVerDetalle={verDetalle} />
+        <HeroReel piezas={destacados} onVerDetalle={verDetalle} />
         <LaSala productos={productos} onVerDetalle={verDetalle} />
         <Estudio />
-        <Historia />
+        <Catalogo productos={productos} onVerDetalle={verDetalle} />
       </main>
       <Footer />
 

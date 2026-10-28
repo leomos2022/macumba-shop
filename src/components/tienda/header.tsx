@@ -17,7 +17,7 @@ const NAV = [
   { href: "#inicio", label: "Inicio" },
   { href: "#la-sala", label: "La Sala" },
   { href: "#el-estudio", label: "El Estudio" },
-  { href: "#historia", label: "Historia" },
+  { href: "#catalogo", label: "El Catálogo" },
 ];
 
 export function Header() {
