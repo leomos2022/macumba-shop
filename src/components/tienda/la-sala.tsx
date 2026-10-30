@@ -42,15 +42,21 @@ export function LaSala({ productos, onVerDetalle }: Props) {
     [total]
   );
 
-  // Centra la primera pieza al montar (sin animación)
+  // Centra la primera pieza al montar.
+  // Doble rAF: garantiza que el navegador completó el layout antes de leer
+  // offsetLeft (crítico en móvil donde SSR/hidratación difiere del layout real).
   useEffect(() => {
-    const pista = pistaRef.current;
-    if (!pista) return;
-    const hijo = pista.children[0] as HTMLElement | undefined;
-    if (hijo) {
-      pista.scrollLeft =
-        hijo.offsetLeft - (pista.clientWidth - hijo.clientWidth) / 2;
-    }
+    const centrar = () => {
+      const pista = pistaRef.current;
+      if (!pista) return;
+      const hijo = pista.children[0] as HTMLElement | undefined;
+      if (hijo && hijo.offsetLeft !== undefined) {
+        pista.scrollLeft =
+          hijo.offsetLeft - (pista.clientWidth - hijo.clientWidth) / 2;
+      }
+    };
+    const id = requestAnimationFrame(() => requestAnimationFrame(centrar));
+    return () => cancelAnimationFrame(id);
   }, []);
 
   const enScroll = useCallback(() => {

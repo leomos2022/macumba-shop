@@ -179,8 +179,10 @@ function TarjetaProducto({
             {unica ? "Pieza única" : "Personalizable"}
           </span>
 
-          {/* Overlay con info al hover / foco */}
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 bg-gradient-to-t from-white via-white/95 to-white/60 p-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100">
+          {/* Overlay con info:
+              - Móvil (touch): siempre visible en la parte inferior
+              - Desktop: aparece en hover/foco */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-white via-white/95 to-white/60 p-4 opacity-100 transition-all duration-300 sm:translate-y-2 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100">
             <p className="text-xs font-medium text-verde">
               {p.technique} · {p.material}
             </p>
