@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { ChromeTienda } from "./chrome-tienda";
 import { HeroReel } from "./hero-reel";
@@ -19,8 +19,8 @@ export function VistaHome({ productos }: { productos: Producto[] }) {
   );
 }
 
-/* ── LA SALA: slide right de piezas únicas ── */
-export function VistaSala({ productos }: { productos: Producto[] }) {
+/* ── LA SALA: componente interno que lee ?pieza= del query ── */
+function VistaSalaInner({ productos }: { productos: Producto[] }) {
   const params = useSearchParams();
   const slugPedido = params.get("pieza");
 
@@ -40,13 +40,24 @@ export function VistaSala({ productos }: { productos: Producto[] }) {
   };
 
   return (
-    <ChromeTienda>
+    <>
       <LaSala productos={productos} onVerDetalle={verDetalle} />
       <DetalleProducto
         producto={productoDetalle}
         abierto={detalleAbierto}
         onCerrar={() => setDetalleAbierto(false)}
       />
+    </>
+  );
+}
+
+/* ── LA SALA: wrapper con Suspense propio para que useSearchParams funcione ── */
+export function VistaSala({ productos }: { productos: Producto[] }) {
+  return (
+    <ChromeTienda>
+      <Suspense fallback={null}>
+        <VistaSalaInner productos={productos} />
+      </Suspense>
     </ChromeTienda>
   );
 }

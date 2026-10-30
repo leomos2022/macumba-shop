@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import type { Metadata } from "next";
 import { getProductos } from "@/lib/productos";
 import { VistaSala } from "@/components/tienda/vistas";
@@ -13,9 +12,5 @@ export const metadata: Metadata = {
 
 export default async function LaSalaPage() {
   const productos = await getProductos();
-  return (
-    <Suspense fallback={null}>
-      <VistaSala productos={productos} />
-    </Suspense>
-  );
+  return <VistaSala productos={productos} />;
 }
