@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { toast } from "sonner";
-import { Minus, Plus, ShoppingBag } from "lucide-react";
+import { Minus, Plus, ShoppingBag, X } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -76,7 +76,7 @@ export function DetalleProducto({ producto, abierto, onCerrar }: Props) {
     <Sheet open={abierto} onOpenChange={(o) => !o && onCerrar()}>
       <SheetContent
         side="right"
-        className="w-full overflow-y-auto bg-crema p-0 sm:max-w-md"
+        className="w-full overflow-y-auto bg-crema p-0 sm:max-w-md [&>button]:hidden"
       >
         <div className="relative aspect-[4/5] w-full bg-white">
           <Image
@@ -86,6 +86,17 @@ export function DetalleProducto({ producto, abierto, onCerrar }: Props) {
             sizes="(max-width: 640px) 100vw, 28rem"
             className="object-cover"
           />
+
+          {/* Botón cerrar grande — esquina superior derecha, siempre visible */}
+          <button
+            type="button"
+            onClick={onCerrar}
+            aria-label="Cerrar ficha"
+            className="absolute right-3 top-3 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white/90 text-tinta shadow-lg backdrop-blur-sm transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-ring"
+          >
+            <X className="h-5 w-5" strokeWidth={2.5} />
+          </button>
+
           <span
             className={`absolute left-4 top-4 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white shadow ${
               unica ? "bg-badge" : "bg-verde"
