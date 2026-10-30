@@ -18,18 +18,21 @@ type Slot = {
   etiqueta: string;
 };
 
-/** Orden real del reel: asian-soul → alas-tejidas → black-inspiration → selva-roja ×2 → alas-tejidas (2 s c/u) */
+/** Orden real del reel: asian-soul → alas-tejidas → black-inspiration → selva-roja → alas-tejidas (cortes secos) */
 const DESFILE_SLOTS: Slot[] = [
   { slug: "asian-soul", etiqueta: "Asian Soul" },
   { slug: "alas-tejidas", etiqueta: "Alas Tejidas" },
   { slug: "black-inspiration", etiqueta: "Black Inspiration" },
   { slug: "selva-roja", etiqueta: "Selva Roja" },
-  { slug: "selva-roja", etiqueta: "Selva Roja · detrás del arte" },
   { slug: "alas-tejidas", etiqueta: "Alas Tejidas" },
 ];
 
-/** Fronteras de segmento en segundos (reel de 12 s, 6 escenas de 2 s) */
-const FRONTERAS = [2.0, 4.0, 6.0, 8.0, 10.0];
+/**
+ * Fronteras de segmento en segundos (reel de 10.63 s, 5 escenas).
+ * Medidas con signalstats tras eliminar el fundido largo hacia/desde la
+ * escena roja: cortes secos en 5.93 (entra Selva Roja) y 8.10 (sale).
+ */
+const FRONTERAS = [2.0, 4.0, 5.9, 8.1];
 
 const DATOS = [
   { valor: "100%", etiqueta: "Textiles reciclados" },

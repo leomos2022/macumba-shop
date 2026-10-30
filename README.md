@@ -28,7 +28,7 @@ cp .env.example .env
 # 4. Crear la base de datos SQLite con el esquema
 npm run db:push
 
-# 5. Cargar el catálogo inicial (5 piezas únicas + 4 siluetas del Estudio)
+# 5. Cargar el catálogo inicial (10 piezas únicas reales)
 npm run db:seed
 
 # 6. Levantar en localhost

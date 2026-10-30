@@ -67,9 +67,9 @@ export function Catalogo({ productos, onVerDetalle }: Props) {
           </h2>
           <SeparadorRombo className="mt-5" />
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-tinta/70">
-            Todas las piezas de un vistazo: únicas del colectivo y siluetas
-            listas para personalizarse. Pasa el cursor sobre una —o tócala—
-            para conocer su historia.
+            Todas las piezas de un vistazo: diez piezas únicas del
+            colectivo, pintadas, bordadas y armadas a mano. Pasa el cursor
+            sobre una —o tócala— para conocer su historia.
           </p>
         </div>
 
