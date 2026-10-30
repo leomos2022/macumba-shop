@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Pause, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Rombo } from "./rombo";
@@ -8,23 +9,27 @@ import { type Producto } from "@/lib/macumba";
 
 type Props = {
   piezas: Producto[];
-  onVerDetalle: (p: Producto) => void;
 };
 
-/** Orden real del desfile: pasarela 01 → 04 → 03 → 05 → 02 → 06 (cada segmento ≈ 2,1 s) */
-const DESFILE_SLUGS = [
-  "selva-roja",
-  "asian-soul",
-  "black-inspiration",
-  "alma-dorada",
-  "selva-roja", // segmento 5: la espalda de la Roja
-  "espiritu-leon",
-] as const;
+type Slot = {
+  /** slug de la pieza en el catálogo (null = pieza nueva, aún sin ficha) */
+  slug: string | null;
+  /** etiqueta que aparece sobre el reel en este segmento */
+  etiqueta: string;
+};
 
-/** Fronteras de segmento en segundos (fade centrado en 2,1·n + 0,2) */
-const FRONTERAS = [2.3, 4.4, 6.5, 8.6, 10.7];
+/** Orden real del reel: asian-soul → nueva → black-inspiration → selva-roja ×2 → nueva (2 s c/u) */
+const DESFILE_SLOTS: Slot[] = [
+  { slug: "asian-soul", etiqueta: "Asian Soul" },
+  { slug: null, etiqueta: "Nueva pieza · próximamente" },
+  { slug: "black-inspiration", etiqueta: "Black Inspiration" },
+  { slug: "selva-roja", etiqueta: "Selva Roja" },
+  { slug: "selva-roja", etiqueta: "Selva Roja · detrás del arte" },
+  { slug: null, etiqueta: "Nueva pieza · próximamente" },
+];
 
-const ETIQUETA_ESPALDA = "Selva Roja · el arte por detrás";
+/** Fronteras de segmento en segundos (reel de 12 s, 6 escenas de 2 s) */
+const FRONTERAS = [2.0, 4.0, 6.0, 8.0, 10.0];
 
 const DATOS = [
   { valor: "100%", etiqueta: "Textiles reciclados" },
@@ -34,10 +39,12 @@ const DATOS = [
 
 /**
  * HERO · Reel + Historia
- * El reel del desfile (video real, arte intocable) junto a la historia de la
- * marca en un único bloque horizontal: media y texto, sin apilar secciones.
+ * El reel de modelos (loop infinito, en silencio) junto a la historia de la
+ * marca en un único bloque horizontal. Tocar el reel abre la ficha de la
+ * pieza en pantalla; si el segmento es una pieza nueva, lleva a La Sala.
  */
-export function HeroReel({ piezas, onVerDetalle }: Props) {
+export function HeroReel({ piezas }: Props) {
+  const router = useRouter();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [idx, setIdx] = useState(0);
   const [reproduciendo, setReproduciendo] = useState(true);
@@ -65,11 +72,8 @@ export function HeroReel({ piezas, onVerDetalle }: Props) {
     return mapa;
   }, [piezas]);
 
-  /** Pieza visible según el segmento del video (null si el catálogo aún no carga) */
-  const pieza =
-    piezas.length === 0
-      ? null
-      : (porSlug.get(DESFILE_SLUGS[idx]) ?? piezas[0]);
+  const slot = DESFILE_SLOTS[idx] ?? DESFILE_SLOTS[0];
+  const pieza = slot.slug ? (porSlug.get(slot.slug) ?? null) : null;
 
   const alternar = useCallback(() => {
     const v = videoRef.current;
@@ -95,7 +99,7 @@ export function HeroReel({ piezas, onVerDetalle }: Props) {
         aria-hidden="true"
       />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 pb-16 pt-10 sm:px-6 lg:grid-cols-[1fr_1.05fr] lg:gap-16 lg:pb-24 lg:pt-16">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 pb-16 pt-10 sm:px-6 lg:grid-cols-[1fr_1.05fr] lg:gap-16 lg:pb-20 lg:pt-14">
         {/* ── Historia (texto) ── */}
         <div className="order-2 lg:order-1">
           <p className="mb-4 flex items-center gap-2 text-xs font-semibold tracking-marca text-verde">
@@ -108,17 +112,12 @@ export function HeroReel({ piezas, onVerDetalle }: Props) {
           </h1>
 
           <p className="mt-5 max-w-xl text-base leading-relaxed text-tinta/75 sm:text-lg">
-            Nacimos en Bogotá con una idea sencilla y poderosa: la ropa que ya
-            existe merece una segunda vida — y que esa vida sea arte.
-            Rescatamos textiles que otros descartaron y los convertimos en
-            chaquetas y abrigos que nadie más tendrá.
-          </p>
-          <p className="mt-4 max-w-xl text-base leading-relaxed text-tinta/75">
-            <strong className="text-tinta">Robert</strong> pinta a mano
-            jaguares, colibríes y flores que suben por las mangas.{" "}
-            <strong className="text-tinta">Arley</strong> borda hilo a hilo,
-            pétalos y palmas que no se apresuran. Ellos son los autores; tú,
-            quien viste la obra.
+            Rescatamos textiles que Bogotá descartó y{" "}
+            <strong className="text-tinta">Robert</strong> y{" "}
+            <strong className="text-tinta">Arley</strong> los convierten en
+            chaquetas únicas —pintadas y bordadas a mano— que nadie más
+            tendrá. Cada pieza del reel existe de verdad: una sola, firmada
+            por el proceso.
           </p>
 
           {/* Datos de la marca */}
@@ -148,7 +147,7 @@ export function HeroReel({ piezas, onVerDetalle }: Props) {
               className="h-12 rounded-full bg-morado px-8 text-base font-semibold hover:bg-morado-hondo"
               asChild
             >
-              <a href="#la-sala">Explorar La Sala</a>
+              <a href="/la-sala">Explorar La Sala</a>
             </Button>
             <Button
               size="lg"
@@ -156,28 +155,30 @@ export function HeroReel({ piezas, onVerDetalle }: Props) {
               className="h-12 rounded-full border-verde/30 px-8 text-base font-medium text-verde hover:bg-verde hover:text-crema"
               asChild
             >
-              <a href="#el-estudio">Personaliza en El Estudio</a>
+              <a href="/el-estudio">Personaliza en El Estudio</a>
             </Button>
           </div>
         </div>
 
-        {/* ── Reel del desfile (Ken Burns sobre la pasarela real) ── */}
+        {/* ── Reel de modelos (loop infinito) ── */}
         <div className="relative order-1 lg:order-2">
           <div className="rounded-[10px] relative mx-auto aspect-[3/4] w-full max-w-md overflow-hidden border border-border/60 bg-crema-hondo shadow-[0_30px_60px_-30px_rgba(20,40,29,0.45)] lg:max-w-lg">
-            {/* El reel entero es clicable: abre la ficha de la pieza en pantalla */}
+            {/* El reel entero es clicable: ficha de la pieza, o La Sala si es nueva */}
             <button
               type="button"
-              onClick={() => pieza && onVerDetalle(pieza)}
+              onClick={() =>
+                pieza ? onVerFicha(pieza, router) : router.push("/la-sala")
+              }
               aria-label={
                 pieza
                   ? `Ver la ficha de ${pieza.name}, pieza en el reel`
-                  : "Ver la ficha de la pieza en el reel"
+                  : "Ver más piezas en La Sala"
               }
               className="absolute inset-0 block w-full cursor-pointer focus-visible:outline-2 focus-visible:outline-ring"
             >
               <video
                 ref={videoRef}
-                poster="/tienda/pasarela-01.png"
+                poster="/tienda/reel-poster.jpg"
                 muted
                 loop
                 playsInline
@@ -193,7 +194,7 @@ export function HeroReel({ piezas, onVerDetalle }: Props) {
                   setIdx(n);
                 }}
               >
-                <source src="/tienda/desfile-completo.mp4" type="video/mp4" />
+                <source src="/tienda/reel-modelos.mp4" type="video/mp4" />
               </video>
             </button>
 
@@ -202,9 +203,7 @@ export function HeroReel({ piezas, onVerDetalle }: Props) {
 
             {/* etiqueta del modelo en pantalla */}
             <span className="pointer-events-none absolute bottom-4 left-4 max-w-[75%] truncate rounded-full bg-tinta/55 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-crema backdrop-blur-sm">
-              {idx === 4
-                ? ETIQUETA_ESPALDA
-                : (pieza?.name ?? "Desfile Macumba")}
+              {pieza?.name ?? slot.etiqueta}
             </span>
 
             {/* play / pausa */}
@@ -212,7 +211,7 @@ export function HeroReel({ piezas, onVerDetalle }: Props) {
               type="button"
               onClick={alternar}
               aria-label={
-                reproduciendo ? "Pausar el desfile" : "Reproducir el desfile"
+                reproduciendo ? "Pausar el reel" : "Reproducir el reel"
               }
               className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-crema/85 text-tinta shadow transition-colors hover:bg-crema focus-visible:outline-2 focus-visible:outline-ring"
             >
@@ -229,10 +228,15 @@ export function HeroReel({ piezas, onVerDetalle }: Props) {
           </span>
 
           <p className="mt-3 text-center text-xs text-tinta/55">
-            Toca el reel y abre la ficha de la pieza en pantalla
+            Toca el reel: abre la ficha de la pieza en pantalla
           </p>
         </div>
       </div>
     </section>
   );
+}
+
+/** Navega a la ficha de la pieza vía query (la vista de La Sala la resuelve) */
+function onVerFicha(pieza: Producto, router: ReturnType<typeof useRouter>) {
+  router.push(`/la-sala?pieza=${encodeURIComponent(pieza.slug)}`);
 }

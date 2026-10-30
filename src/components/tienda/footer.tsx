@@ -33,10 +33,10 @@ export function Footer() {
           </p>
           <ul className="mt-4 space-y-2.5 text-sm">
             {[
-              ["#inicio", "Inicio"],
-              ["#la-sala", "La Sala"],
-              ["#el-estudio", "El Estudio"],
-              ["#historia", "Historia"],
+              ["/", "Inicio"],
+              ["/la-sala", "La Sala"],
+              ["/el-estudio", "El Estudio"],
+              ["/catalogo", "El Catálogo"],
             ].map(([href, label]) => (
               <li key={href}>
                 <a
