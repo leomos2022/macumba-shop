@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Menu, ShoppingBag } from "lucide-react";
 import {
   Sheet,
@@ -14,10 +15,10 @@ import { useCanasta, totalItems } from "@/stores/canasta";
 import { urlWhatsApp } from "@/lib/macumba";
 
 const NAV = [
-  { href: "#inicio", label: "Inicio" },
-  { href: "#la-sala", label: "La Sala" },
-  { href: "#el-estudio", label: "El Estudio" },
-  { href: "#historia", label: "Historia" },
+  { href: "/", label: "Inicio" },
+  { href: "/la-sala", label: "La Sala" },
+  { href: "/el-estudio", label: "El Estudio" },
+  { href: "/catalogo", label: "El Catálogo" },
 ];
 
 export function Header() {
@@ -31,8 +32,8 @@ export function Header() {
     <header className="sticky top-0 z-40 border-b border-border/70 bg-crema/90 backdrop-blur supports-[backdrop-filter]:bg-crema/75">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
         {/* Wordmark */}
-        <a
-          href="#inicio"
+        <Link
+          href="/"
           className="group flex items-baseline gap-2 rounded-md focus-visible:outline-2 focus-visible:outline-ring"
           aria-label="Macumba Shop — ir al inicio"
         >
@@ -43,18 +44,18 @@ export function Header() {
           <span className="hidden text-[0.65rem] font-semibold tracking-marca text-verde sm:inline">
             SHOP
           </span>
-        </a>
+        </Link>
 
         {/* Navegación escritorio */}
         <nav aria-label="Principal" className="hidden items-center gap-7 md:flex">
           {NAV.map((n) => (
-            <a
+            <Link
               key={n.href}
               href={n.href}
               className="text-sm font-medium text-tinta/80 transition-colors hover:text-morado focus-visible:outline-2 focus-visible:outline-ring rounded-md"
             >
               {n.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -110,14 +111,14 @@ export function Header() {
               </SheetHeader>
               <nav aria-label="Menú móvil" className="flex flex-col gap-1 px-4 pt-4">
                 {NAV.map((n) => (
-                  <a
+                  <Link
                     key={n.href}
                     href={n.href}
                     onClick={() => setMenuAbierto(false)}
                     className="rounded-lg px-3 py-3 font-display text-xl text-tinta transition-colors hover:bg-crema-hondo"
                   >
                     {n.label}
-                  </a>
+                  </Link>
                 ))}
               </nav>
               <p className="mt-auto px-6 pb-6 text-sm text-muted-foreground">

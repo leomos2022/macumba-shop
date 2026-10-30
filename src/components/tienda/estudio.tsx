@@ -41,7 +41,7 @@ export function Estudio() {
       "",
       `• Silueta: ${siluetaActual.nombre}`,
       `• Color base: ${colorActual.nombre}`,
-      `• Técnica: pintado a mano (Robert / Arley)`,
+      `• Técnica: pintado a mano por el colectivo`,
       "",
       "¿Me acompañan con el siguiente paso?",
     ].join("\n")
@@ -212,7 +212,7 @@ export function Estudio() {
                   <b className="text-tinta">{formatoCOP(siluetaActual.base)}</b>
                 </p>
                 <p>
-                  Pintado a mano (Robert / Arley) —{" "}
+                  Pintado a mano por el colectivo —{" "}
                   <b className="text-tinta">{formatoCOP(COSTO_ARTE)}</b>
                 </p>
               </div>

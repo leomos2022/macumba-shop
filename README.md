@@ -25,19 +25,18 @@ npm install
 cp .env.example .env
 #    → ajusta DATABASE_URL si prefieres ruta absoluta
 
-# 4. Crear la base de datos SQLite con el esquema
-npm run db:push
+# 4. Crear la base de datos Y cargar el catálogo (un solo paso)
+npm run db:setup
 
-# 5. Cargar el catálogo inicial (5 piezas únicas + 4 siluetas del Estudio)
-npm run db:seed
-
-# 6. Levantar en localhost
+# 5. Levantar en localhost
 npm run dev
 ```
 
 Abre **http://localhost:3000** 🎉
 
-> Si algún día la base de datos se daña o quieres partir de cero: borra `db/custom.db` y repite los pasos 4 y 5.
+> Si algún día la base de datos se daña o quieres partir de cero: borra `db/custom.db` y vuelve a correr `npm run db:setup`.
+>
+> ¿La Sala o el catálogo salen en blanco, sin prendas ni precios? Es la base de datos sin crear/sembrar: detén el servidor, corre `npm run db:setup` y vuelve a levantar `npm run dev`.
 
 ## Scripts disponibles
 
@@ -48,6 +47,7 @@ Abre **http://localhost:3000** 🎉
 | `npm start` | Sirve el build de producción |
 | `npm run db:push` | Sincroniza `prisma/schema.prisma` con SQLite |
 | `npm run db:seed` | Carga el catálogo inicial (`scripts/seed.ts`) |
+| `npm run db:setup` | Un solo paso: crea la base de datos y carga el catálogo |
 | `npm run lint` | ESLint |
 
 ## Variables de entorno (`.env`)

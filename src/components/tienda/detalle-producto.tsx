@@ -205,7 +205,7 @@ export function DetalleProducto({ producto, abierto, onCerrar }: Props) {
                   <li>1 · Eliges tu silueta y color base</li>
                   <li>2 · Definimos la técnica: pintura o bordado</li>
                   <li>3 · El colectivo crea el arte contigo</li>
-                  <li>4 · Robert y Arley la hacen realidad</li>
+                  <li>4 · El colectivo la hace realidad</li>
                 </ol>
               </div>
               <Button
