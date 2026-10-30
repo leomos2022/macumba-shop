@@ -10,11 +10,26 @@ import { Catalogo } from "./catalogo";
 import { DetalleProducto } from "./detalle-producto";
 import type { Producto } from "@/lib/macumba";
 
-/* ── HOME: reel + historia, sin más contenido (módulos en rutas separadas) ── */
+/* ── HOME: reel + La Sala + Catálogo en scroll vertical ── */
 export function VistaHome({ productos }: { productos: Producto[] }) {
+  const [productoDetalle, setProductoDetalle] = useState<Producto | null>(null);
+  const [detalleAbierto, setDetalleAbierto] = useState(false);
+
+  const verDetalle = (p: Producto) => {
+    setProductoDetalle(p);
+    setDetalleAbierto(true);
+  };
+
   return (
     <ChromeTienda>
       <HeroReel piezas={productos} />
+      <LaSala productos={productos} onVerDetalle={verDetalle} />
+      <Catalogo productos={productos} onVerDetalle={verDetalle} />
+      <DetalleProducto
+        producto={productoDetalle}
+        abierto={detalleAbierto}
+        onCerrar={() => setDetalleAbierto(false)}
+      />
     </ChromeTienda>
   );
 }
