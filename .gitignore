@@ -80,3 +80,7 @@ Thumbs.db
 # zip de entrega servido temporalmente (no va al repo)
 /public/macumba-shop-src.zip
 /public/qa
+
+# frames de análisis QA del video
+/qa-video/barras
+/qa-video/mini

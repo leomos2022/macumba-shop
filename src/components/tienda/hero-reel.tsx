@@ -18,14 +18,14 @@ type Slot = {
   etiqueta: string;
 };
 
-/** Orden real del reel: asian-soul → nueva → black-inspiration → selva-roja ×2 → nueva (2 s c/u) */
+/** Orden real del reel: asian-soul → alas-tejidas → black-inspiration → selva-roja ×2 → alas-tejidas (2 s c/u) */
 const DESFILE_SLOTS: Slot[] = [
   { slug: "asian-soul", etiqueta: "Asian Soul" },
-  { slug: null, etiqueta: "Nueva pieza · próximamente" },
+  { slug: "alas-tejidas", etiqueta: "Alas Tejidas" },
   { slug: "black-inspiration", etiqueta: "Black Inspiration" },
   { slug: "selva-roja", etiqueta: "Selva Roja" },
   { slug: "selva-roja", etiqueta: "Selva Roja · detrás del arte" },
-  { slug: null, etiqueta: "Nueva pieza · próximamente" },
+  { slug: "alas-tejidas", etiqueta: "Alas Tejidas" },
 ];
 
 /** Fronteras de segmento en segundos (reel de 12 s, 6 escenas de 2 s) */
@@ -112,12 +112,10 @@ export function HeroReel({ piezas }: Props) {
           </h1>
 
           <p className="mt-5 max-w-xl text-base leading-relaxed text-tinta/75 sm:text-lg">
-            Rescatamos textiles que Bogotá descartó y{" "}
-            <strong className="text-tinta">Robert</strong> y{" "}
-            <strong className="text-tinta">Arley</strong> los convierten en
-            chaquetas únicas —pintadas y bordadas a mano— que nadie más
-            tendrá. Cada pieza del reel existe de verdad: una sola, firmada
-            por el proceso.
+            Rescatamos textiles que Bogotá descartó y nuestro colectivo los
+            transforma a mano —pintura, bordado y crochet— en chaquetas
+            únicas que nadie más tendrá. Cada pieza del reel existe de
+            verdad: una sola, firmada por el proceso.
           </p>
 
           {/* Datos de la marca */}

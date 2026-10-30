@@ -1,5 +1,5 @@
 // Seed del catálogo "La Sala" — Macumba Shop
-// 5 piezas únicas reales de la pasarela (arte de Robert / Arley) + 4 siluetas personalizables de El Estudio
+// 6 piezas únicas con foto real (arte del colectivo) + 4 siluetas personalizables de El Estudio
 // Precios de REFERENCIA — por confirmar con el taller
 import { PrismaClient } from '@prisma/client';
 
@@ -16,12 +16,12 @@ const productos = [
     basePrice: 420000,
     sizes: 'S,M,L,XL',
     description:
-      'La cazadora roja clásica de la serie: denim rojo intenso con el arte del colectivo pintado a mano en la espalda. Frente limpio, espalda que cuenta la historia — cada trazo es de Robert y Arley sobre tela que ya tuvo otra vida.',
+      'La cazadora roja clásica de la serie: denim rojo intenso con el arte del colectivo pintado a mano en la espalda. Frente limpio, espalda que cuenta la historia — cada trazo es del colectivo sobre tela que ya tuvo otra vida.',
     technique: 'Pintura textil a mano',
     material: 'Denim reciclado',
     imageUrl: '/tienda/pasarela-01.png',
     heroImageUrl: '/tienda/pasarela-02.png',
-    serieLabel: 'COLECCIÓN MACUMBA · 01/05',
+    serieLabel: 'COLECCIÓN MACUMBA · 01/06',
     isFeatured: true,
     sortOrder: 1,
   },
@@ -39,7 +39,7 @@ const productos = [
     material: 'Denim reciclado',
     imageUrl: '/tienda/pasarela-04.png',
     heroImageUrl: null,
-    serieLabel: 'COLECCIÓN MACUMBA · 02/05',
+    serieLabel: 'COLECCIÓN MACUMBA · 02/06',
     isFeatured: true,
     sortOrder: 2,
   },
@@ -57,7 +57,7 @@ const productos = [
     material: 'Denim reciclado',
     imageUrl: '/tienda/pasarela-03.png',
     heroImageUrl: null,
-    serieLabel: 'COLECCIÓN MACUMBA · 03/05',
+    serieLabel: 'COLECCIÓN MACUMBA · 03/06',
     isFeatured: true,
     sortOrder: 3,
   },
@@ -73,29 +73,47 @@ const productos = [
       'El abrigo largo de la serie: silueta contundente y arte en tonos dorados que recorre la pieza de arriba a abajo. La prenda más escénica del colectivo, hecha para durar muchos inviernos.',
     technique: 'Pintura textil a mano',
     material: 'Denim reciclado',
-    imageUrl: '/tienda/pasarela-05.png',
+    imageUrl: '/tienda/sala-alma-dorada.jpg',
     heroImageUrl: null,
-    serieLabel: 'COLECCIÓN MACUMBA · 04/05',
+    serieLabel: 'COLECCIÓN MACUMBA · 04/06',
     isFeatured: true,
     sortOrder: 4,
   },
   {
-    slug: 'espiritu-leon',
-    name: 'Espíritu León',
+    slug: 'alas-tejidas',
+    name: 'Alas Tejidas',
     category: 'chaqueta',
-    gender: 'masculino',
+    gender: 'femenino',
     kind: 'unica',
     basePrice: 480000,
-    sizes: 'L,XL',
+    sizes: 'S,M,L',
     description:
-      'La fuerza del león pintada a mano sobre denim reciclado: el animal espiritual del colectivo en una pieza de carácter. Frente limpio, arte protagonista en la espalda.',
-    technique: 'Pintura textil a mano',
+      'Denim celeste rescatado con un pájaro bordado a mano en la espalda, flores de crochet y puños tejidos en degradé arcoíris. Pieza al detalle: hilo por hilo sobre tela que ya tuvo otra vida — no se repite.',
+    technique: 'Bordado y crochet a mano',
     material: 'Denim reciclado',
-    imageUrl: '/tienda/pasarela-06.png',
+    imageUrl: '/tienda/sala-alas-tejidas.jpg',
     heroImageUrl: null,
-    serieLabel: 'COLECCIÓN MACUMBA · 05/05',
+    serieLabel: 'COLECCIÓN MACUMBA · 05/06',
     isFeatured: true,
     sortOrder: 5,
+  },
+  {
+    slug: 'selva-nocturna',
+    name: 'Selva Nocturna',
+    category: 'abrigo',
+    gender: 'femenino',
+    kind: 'unica',
+    basePrice: 520000,
+    sizes: 'M,L,XL',
+    description:
+      'Abrigo largo en denim negro con bordado turquesa en el pecho y puños y ruedo rematados en crochet multicolor. La calma de la selva sobre la ciudad: arte trenzado a mano, una sola vez.',
+    technique: 'Bordado y crochet a mano',
+    material: 'Denim reciclado',
+    imageUrl: '/tienda/sala-selva-nocturna.jpg',
+    heroImageUrl: null,
+    serieLabel: 'COLECCIÓN MACUMBA · 06/06',
+    isFeatured: true,
+    sortOrder: 6,
   },
   // ---------- PERSONALIZABLES (siluetas base de El Estudio) ----------
   {
@@ -107,14 +125,14 @@ const productos = [
     basePrice: 250000,
     sizes: 'S,M,L,XL',
     description:
-      'Tu cazadora denim reciclada, tu color y tu arte: en El Estudio eliges la silueta, el tono, la técnica (pintura o bordado) y el diseño que la hará única. Robert y Arley la hacen realidad.',
+      'Tu cazadora denim reciclada, tu color y tu arte: en El Estudio eliges la silueta, el tono, la técnica (pintura o bordado) y el diseño que la hará única. El colectivo la hace realidad.',
     technique: 'Pintura o bordado a elegir',
     material: 'Denim reciclado',
     imageUrl: '/tienda/sil-cazadora.png',
     heroImageUrl: null,
     serieLabel: null,
     isFeatured: false,
-    sortOrder: 6,
+    sortOrder: 7,
   },
   {
     slug: 'chaqueta-corta-personalizable',
@@ -132,7 +150,7 @@ const productos = [
     heroImageUrl: null,
     serieLabel: null,
     isFeatured: false,
-    sortOrder: 7,
+    sortOrder: 8,
   },
   {
     slug: 'abrigo-personalizable',
@@ -150,7 +168,7 @@ const productos = [
     heroImageUrl: null,
     serieLabel: null,
     isFeatured: false,
-    sortOrder: 8,
+    sortOrder: 9,
   },
   {
     slug: 'cazadora-oversize-personalizable',
@@ -168,7 +186,7 @@ const productos = [
     heroImageUrl: null,
     serieLabel: null,
     isFeatured: false,
-    sortOrder: 9,
+    sortOrder: 10,
   },
 ];
 

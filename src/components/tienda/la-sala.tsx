@@ -219,7 +219,7 @@ export function LaSala({ productos, onVerDetalle }: Props) {
         {/* Salida directa al catálogo completo */}
         <div className="mt-10 text-center">
           <a
-            href="#catalogo"
+            href="/catalogo"
             className="inline-flex h-12 items-center gap-2 rounded-full bg-morado px-8 text-base font-semibold text-white transition-colors hover:bg-morado-hondo focus-visible:outline-2 focus-visible:outline-ring"
           >
             <ChevronDown className="h-4 w-4" aria-hidden="true" />
