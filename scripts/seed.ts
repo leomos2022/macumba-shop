@@ -18,8 +18,10 @@ const productos = [
       'Chaqueta de corte corto al cuerpo, confeccionada a pedido sobre denim reciclado y pintada a mano con pintura textil: el colectivo interviene cada pieza al confirmar tu pedido, así que ningún trazo se repite de una prenda a otra. La foto es una ejecución real del taller.',
     technique: 'Pintura textil a mano',
     material: 'Denim reciclado',
-    imageUrl: '/tienda/pasarela-01.png',
-    heroImageUrl: '/tienda/pasarela-02.png',
+    // Foto confirmada por el taller: la pieza que el catálogo viejo llamaba
+    // "Asian Soul" es esta chaqueta torero (corta) con arte pintado.
+    imageUrl: '/tienda/pasarela-04.png',
+    heroImageUrl: null,
     serieLabel: 'LÍNEA MACUMBA · 01/06',
     isFeatured: true,
     sortOrder: 1,
