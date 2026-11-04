@@ -18,13 +18,13 @@ type Slot = {
   etiqueta: string;
 };
 
-/** Orden real del reel: asian-soul → alas-tejidas → black-inspiration → selva-roja → alas-tejidas (cortes secos) */
+/** Orden real del reel: pintura → mangas tejidas → pintura → torero corta → mangas tejidas (cortes secos) */
 const DESFILE_SLOTS: Slot[] = [
-  { slug: "asian-soul", etiqueta: "Asian Soul" },
-  { slug: "alas-tejidas", etiqueta: "Alas Tejidas" },
-  { slug: "black-inspiration", etiqueta: "Black Inspiration" },
-  { slug: "selva-roja", etiqueta: "Selva Roja" },
-  { slug: "alas-tejidas", etiqueta: "Alas Tejidas" },
+  { slug: "cazadora-pintura", etiqueta: "Cazadora pintura textil" },
+  { slug: "cazadora-ludivia", etiqueta: "Cazadora · mangas tejidas" },
+  { slug: "cazadora-pintura", etiqueta: "Cazadora pintura textil" },
+  { slug: "chaqueta-torero-corta-pintura", etiqueta: "Chaqueta torero (corta)" },
+  { slug: "cazadora-ludivia", etiqueta: "Cazadora · mangas tejidas" },
 ];
 
 /**
@@ -116,9 +116,9 @@ export function HeroReel({ piezas }: Props) {
 
           <p className="mt-5 max-w-xl text-base leading-relaxed text-tinta/75 sm:text-lg">
             Rescatamos textiles que Bogotá descartó y nuestro colectivo los
-            transforma a mano —pintura, bordado y crochet— en chaquetas
-            únicas que nadie más tendrá. Cada pieza del reel existe de
-            verdad: una sola, firmada por el proceso.
+            transforma a mano —pintura y tejido— en prendas hechas a pedido.
+            Lo que ves en el reel son ejecuciones reales del taller: el corte
+            se repite, el arte nunca.
           </p>
 
           {/* Datos de la marca */}
@@ -204,7 +204,7 @@ export function HeroReel({ piezas }: Props) {
 
             {/* etiqueta del modelo en pantalla */}
             <span className="pointer-events-none absolute bottom-4 left-4 max-w-[75%] truncate rounded-full bg-tinta/55 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-crema backdrop-blur-sm">
-              {pieza?.name ?? slot.etiqueta}
+              {slot.etiqueta}
             </span>
 
             {/* play / pausa */}
@@ -224,8 +224,8 @@ export function HeroReel({ piezas }: Props) {
             </button>
           </div>
 
-          <span className="absolute left-4 top-6 rounded-full bg-badge px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-white shadow-lg sm:left-8">
-            Pieza única
+          <span className="absolute left-4 top-6 rounded-full bg-verde px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-white shadow-lg sm:left-8">
+            Hecha a pedido
           </span>
 
           <p className="mt-3 text-center text-xs text-tinta/55">

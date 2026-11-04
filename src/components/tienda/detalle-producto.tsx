@@ -18,6 +18,7 @@ import { useCanasta } from "@/stores/canasta";
 import {
   ETIQUETA_CATEGORIA,
   ETIQUETA_GENERO,
+  ETIQUETA_KIND,
   formatoCOP,
   mensajeConsultaProducto,
   tallasDe,
@@ -47,6 +48,10 @@ export function DetalleProducto({ producto, abierto, onCerrar }: Props) {
 
   if (!producto) return null;
   const unica = producto.kind === "unica";
+  const pedido = producto.kind === "pedido";
+  // La ficha con talla y canasta aplica a piezas únicas y hechas a pedido;
+  // el camino "El Estudio" queda reservado para lo personalizable.
+  const comprable = unica || pedido;
   const tallas = tallasDe(producto.sizes);
 
   const anadir = () => {
@@ -91,7 +96,7 @@ export function DetalleProducto({ producto, abierto, onCerrar }: Props) {
               unica ? "bg-badge" : "bg-verde"
             }`}
           >
-            {unica ? "Pieza única" : "Personalizable"}
+            {ETIQUETA_KIND[producto.kind] ?? producto.kind}
           </span>
         </div>
 
@@ -129,9 +134,14 @@ export function DetalleProducto({ producto, abierto, onCerrar }: Props) {
                 una sola, sin repetición
               </span>
             )}
+            {pedido && (
+              <span className="text-xs text-muted-foreground">
+                se confecciona para ti al confirmar
+              </span>
+            )}
           </div>
 
-          {unica ? (
+          {comprable ? (
             <>
               {/* Tallas */}
               <fieldset className="mt-6">

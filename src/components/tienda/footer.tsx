@@ -21,8 +21,8 @@ export function Footer() {
             </span>
           </p>
           <p className="mt-3 max-w-xs text-sm leading-relaxed text-crema/70">
-            Textiles reciclados, arte a mano. Piezas únicas intervenidas por
-            artistas bogotanos.
+            Textiles reciclados, arte a mano. Prendas hechas a pedido
+            intervenidas por artistas bogotanos.
           </p>
         </div>
 
@@ -77,7 +77,7 @@ export function Footer() {
           <p>© 2026 Macumba Shop · Hecho a mano en Bogotá</p>
           <p className="flex items-center gap-2">
             <Rombo className="h-3 w-3 text-pistacho/70" />
-            Viste Arte · Pieza única
+            Viste Arte · Hecho a pedido
           </p>
         </div>
       </div>

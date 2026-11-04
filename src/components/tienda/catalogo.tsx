@@ -7,6 +7,7 @@ import { SeparadorRombo } from "./rombo";
 import {
   ETIQUETA_CATEGORIA,
   ETIQUETA_GENERO,
+  ETIQUETA_KIND,
   formatoCOP,
   tallasDe,
   type Producto,
@@ -22,7 +23,7 @@ type FiltroGenero = "todos" | "femenino" | "masculino";
 
 /**
  * EL CATÁLOGO · grid estático con filtros (sección propia, SEO)
- * Todas las piezas de un vistazo: únicas y personalizables.
+ * Todas las prendas de un vistazo: hechas a pedido por el taller.
  */
 export function Catalogo({ productos, onVerDetalle }: Props) {
   const [categoria, setCategoria] = useState<FiltroCategoria>("todas");
@@ -67,9 +68,9 @@ export function Catalogo({ productos, onVerDetalle }: Props) {
           </h2>
           <SeparadorRombo className="mt-5" />
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-tinta/70">
-            Todas las piezas de un vistazo: diez piezas únicas del
-            colectivo, pintadas, bordadas y armadas a mano. Pasa el cursor
-            sobre una —o tócala— para conocer su historia.
+            Seis prendas hechas a pedido sobre denim reciclado, pintadas y
+            tejidas a mano por el colectivo. Pasa el cursor sobre una —o
+            tócala— para ver su ficha y añadirla a la canasta.
           </p>
         </div>
 
@@ -152,7 +153,6 @@ function TarjetaProducto({
   producto: Producto;
   onVerDetalle: (p: Producto) => void;
 }) {
-  const unica = p.kind === "unica";
   const tallas = tallasDe(p.sizes);
 
   return (
@@ -173,10 +173,10 @@ function TarjetaProducto({
           />
           <span
             className={`absolute left-3 top-3 rounded-full px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-wide text-white shadow ${
-              unica ? "bg-badge" : "bg-verde"
+              p.kind === "unica" ? "bg-badge" : "bg-verde"
             }`}
           >
-            {unica ? "Pieza única" : "Personalizable"}
+            {ETIQUETA_KIND[p.kind] ?? p.kind}
           </span>
 
           {/* Overlay con info al hover / foco */}
@@ -204,7 +204,9 @@ function TarjetaProducto({
             </p>
           </div>
           <p className="sm:whitespace-nowrap font-semibold text-morado">
-            {unica ? formatoCOP(p.basePrice) : `Desde ${formatoCOP(p.basePrice)}`}
+            {p.kind === "personalizable"
+              ? `Desde ${formatoCOP(p.basePrice)}`
+              : formatoCOP(p.basePrice)}
           </p>
         </div>
       </button>

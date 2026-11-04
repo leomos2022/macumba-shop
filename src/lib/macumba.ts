@@ -41,8 +41,17 @@ export function tallasDe(sizes: string): string[] {
 
 export const ETIQUETA_CATEGORIA: Record<string, string> = {
   chaqueta: "Chaquetas",
+  "chaqueta-torero": "Chaqueta torero",
+  cazadora: "Cazadora",
   abrigo: "Abrigos",
   otra: "Otras prendas",
+};
+
+/** Sello de la tarjeta según el tipo de producto */
+export const ETIQUETA_KIND: Record<string, string> = {
+  unica: "Pieza única",
+  pedido: "Hecha a pedido",
+  personalizable: "Personalizable",
 };
 
 export const ETIQUETA_GENERO: Record<string, string> = {

@@ -56,8 +56,8 @@ export function CanastaSheet() {
               <ShoppingBag className="h-7 w-7 text-verde" aria-hidden="true" />
             </span>
             <p className="text-sm leading-relaxed text-tinta/70">
-              Tu canasta está vacía. En La Sala hay piezas únicas esperando a
-              alguien como tú.
+              Tu canasta está vacía. En La Sala hay prendas hechas a pedido
+              esperando a alguien como tú.
             </p>
             <Button
               className="rounded-full bg-morado px-8 font-semibold hover:bg-morado-hondo"

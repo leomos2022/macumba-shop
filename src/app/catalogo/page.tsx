@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "El Catálogo completo | Macumba Shop",
   description:
-    "Todas las piezas de Macumba Shop de un vistazo: únicas del colectivo y siluetas personalizables. Filtros por categoría y género. Pago contra entrega en Bogotá.",
+    "Las seis prendas de Macumba Shop de un vistazo: chaquetas torero, cazadoras y abrigos pintados y tejidos a mano, hechas a pedido. Filtros por categoría y género. Pago contra entrega en Bogotá.",
 };
 
 export default async function CatalogoPage() {

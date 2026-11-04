@@ -21,11 +21,11 @@ export function LaSala({ productos, onVerDetalle }: Props) {
   const pistaRef = useRef<HTMLDivElement>(null);
   const [activo, setActivo] = useState(0);
 
-  const unicas = productos
-    .filter((p) => p.kind === "unica")
+  const prendas = productos
+    .filter((p) => p.kind !== "personalizable")
     .sort((a, b) => a.sortOrder - b.sortOrder);
 
-  const total = unicas.length;
+  const total = prendas.length;
 
   const irA = useCallback(
     (i: number) => {
@@ -92,8 +92,8 @@ export function LaSala({ productos, onVerDetalle }: Props) {
             Pieza a pieza, como en el taller
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-crema/70">
-            Desliza hacia la derecha y recorre el desfile de piezas únicas.
-            Toca la prenda para abrir su ficha completa.
+            Desliza hacia la derecha y recorre el desfile de prendas
+            hechas a pedido. Toca la prenda para abrir su ficha completa.
           </p>
         </div>
 
@@ -104,7 +104,7 @@ export function LaSala({ productos, onVerDetalle }: Props) {
           tabIndex={0}
           role="region"
           aria-roledescription="carrusel"
-          aria-label="Piezas únicas de La Sala — desliza o usa las flechas"
+          aria-label="Prendas de La Sala — desliza o usa las flechas"
           onKeyDown={(e) => {
             if (e.key === "ArrowRight") {
               e.preventDefault();
@@ -117,7 +117,7 @@ export function LaSala({ productos, onVerDetalle }: Props) {
           }}
           className="sin-scrollbar mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth px-[15vw] pb-2 sm:gap-8 sm:px-[20vw] focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-[-4px] lg:px-[24vw]"
         >
-          {unicas.map((p, i) => (
+          {prendas.map((p, i) => (
             <article
               key={p.slug}
               aria-hidden={i !== activo}
@@ -141,7 +141,7 @@ export function LaSala({ productos, onVerDetalle }: Props) {
                 <div className="relative aspect-[3/4] w-full">
                   <Image
                     src={p.imageUrl}
-                    alt={`${p.name} — ${p.technique.toLowerCase()} sobre ${p.material.toLowerCase()}, pieza única`}
+                    alt={`${p.name} — ${p.technique.toLowerCase()} sobre ${p.material.toLowerCase()}, hecha a pedido`}
                     fill
                     sizes="(max-width: 640px) 64vw, 380px"
                     className="object-cover"
@@ -191,7 +191,7 @@ export function LaSala({ productos, onVerDetalle }: Props) {
             role="tablist"
             aria-label="Ir a una pieza"
           >
-            {unicas.map((p, i) => (
+            {prendas.map((p, i) => (
               <button
                 key={p.slug}
                 role="tab"

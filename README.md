@@ -1,6 +1,6 @@
 # Macumba Shop 🌿 ◆
 
-Tienda de moda arte — prendas únicas de denim reciclado intervenidas a mano por artistas bogotanos (Robert / Arley). Pedidos por WhatsApp con pago contra entrega.
+Tienda de moda arte — prendas de denim reciclado **hechas a pedido** e intervenidas a mano por artistas bogotanos (Robert / Arley). Seis prendas en línea: chaqueta torero, cazadora y abrigo, en pintura textil o con mangas tejidas "tipo Ludivia". Pedidos por WhatsApp con pago contra entrega.
 
 Diseño **Selva Viva**: crema `#F7F3E9` · verde selva `#1E5631` · pistacho `#93C572` · morado `#5B2A86` (solo CTA) · tipografías Fraunces + Outfit · motivo rombo del bordado.
 

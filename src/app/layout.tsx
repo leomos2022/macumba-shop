@@ -18,21 +18,21 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   title: "Macumba Shop — Viste Arte",
   description:
-    "Ropa de textiles reciclados intervenida a mano por artistas bogotanos. Piezas únicas pintadas y bordadas: chaquetas, abrigos y creaciones hechas a tu manera. Bogotá, Colombia.",
+    "Ropa de textiles reciclados intervenida a mano por artistas bogotanos. Chaquetas, cazadoras y abrigos pintados y tejidos a mano, hechos a pedido. Bogotá, Colombia.",
   keywords: [
     "Macumba Shop",
     "ropa reciclada",
     "moda sostenible Colombia",
     "pintura textil",
     "bordado a mano",
-    "piezas únicas",
+    "prendas hechas a pedido",
     "Bogotá",
   ],
   authors: [{ name: "Macumba Shop" }],
   openGraph: {
     title: "Macumba Shop — Viste Arte",
     description:
-      "Textiles reciclados, arte a mano. Piezas únicas desde Bogotá para toda Colombia.",
+      "Textiles reciclados, arte a mano. Prendas hechas a pedido desde Bogotá para toda Colombia.",
     siteName: "Macumba Shop",
     type: "website",
     locale: "es_CO",
