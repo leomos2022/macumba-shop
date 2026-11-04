@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Catálogo "La Sala" de Macumba Shop
+// Catálogo "La Sala" de Macumba Arte-Magia
 // kind: 'unica' = pieza terminada pintada a mano | 'personalizable' = silueta base de El Taller
 model Product {
   id            String   @id @default(cuid())

@@ -37,7 +37,7 @@ export function Estudio() {
 
   const ctaWhatsApp = urlWhatsApp(
     [
-      "¡Hola, Macumba Shop! Quiero empezar mi prenda en El Estudio:",
+      "¡Hola, Macumba Arte-Magia! Quiero empezar mi prenda en El Estudio:",
       "",
       `• Silueta: ${siluetaActual.nombre}`,
       `• Color base: ${colorActual.nombre}`,

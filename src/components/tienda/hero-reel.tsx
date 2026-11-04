@@ -93,7 +93,7 @@ export function HeroReel({ piezas }: Props) {
   return (
     <section
       id="inicio"
-      aria-label="Macumba Shop — moda que viste arte"
+      aria-label="Macumba Arte-Magia — moda que viste arte"
       className="relative overflow-hidden bg-crema"
     >
       {/* textura sutil de tejido */}
@@ -107,14 +107,29 @@ export function HeroReel({ piezas }: Props) {
         <div className="order-2 lg:order-1">
           <p className="mb-4 flex items-center gap-2 text-xs font-semibold tracking-marca text-verde">
             <Rombo className="h-3.5 w-3.5 text-morado" />
-            MACUMBA SHOP · BOGOTÁ
+            HECHO A MANO EN BOGOTÁ
           </p>
 
-          <h1 className="font-display text-4xl leading-[1.05] text-tinta sm:text-5xl lg:text-6xl">
-            Moda que viste arte
+          {/*
+            Marca con la caligrafía de la etiqueta (Macondo, pintada a mano):
+            nombre grande + ARTE-MAGIA espaciado debajo, igual que la etiqueta
+            cosida en las prendas.
+          */}
+          <h1 className="text-tinta">
+            <span className="block font-marca text-[3.4rem] leading-[0.95] sm:text-7xl lg:text-[5.4rem]">
+              Macumba
+            </span>
+            <span className="mt-3 block font-display text-base tracking-marca text-verde sm:text-lg">
+              ARTE-MAGIA
+            </span>
+            <span className="sr-only"> — moda que viste arte</span>
           </h1>
 
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-tinta/75 sm:text-lg">
+          <p className="mt-6 max-w-xl font-display text-2xl leading-snug text-tinta/90 sm:text-[1.65rem]">
+            Moda que viste arte
+          </p>
+
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-tinta/75 sm:text-lg">
             Rescatamos textiles que Bogotá descartó y nuestro colectivo los
             transforma a mano —pintura y tejido— en prendas hechas a pedido.
             Lo que ves en el reel son ejecuciones reales del taller: el corte

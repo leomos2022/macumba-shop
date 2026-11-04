@@ -1,4 +1,4 @@
-# Macumba Shop 🌿 ◆
+# Macumba Arte-Magia 🌿 ◆
 
 Tienda de moda arte — prendas de denim reciclado **hechas a pedido** e intervenidas a mano por artistas bogotanos (Robert / Arley). Seis prendas en línea: chaqueta torero, cazadora y abrigo, en pintura textil o con mangas tejidas "tipo Ludivia". Pedidos por WhatsApp con pago contra entrega.
 

@@ -1,4 +1,4 @@
-// Utilidades de dominio Macumba Shop
+// Utilidades de dominio Macumba Arte-Magia
 
 export type Producto = {
   id: string;
@@ -77,7 +77,7 @@ export function urlWhatsApp(mensaje: string): string {
 /** Mensaje de consulta por una pieza */
 export function mensajeConsultaProducto(nombre: string): string {
   return [
-    "¡Hola, Macumba Shop!",
+    "¡Hola, Macumba Arte-Magia!",
     "",
     `Vengo de la web y me interesa "${nombre}".`,
     "¿Me cuentas disponibilidad y detalles de la pieza?",
@@ -93,7 +93,7 @@ export function mensajePedido(items: ItemCanasta[], total: number): string {
       )}`
   );
   return [
-    "¡Hola, Macumba Shop!",
+    "¡Hola, Macumba Arte-Magia!",
     "",
     "Quiero hacer un pedido desde la web:",
     "",

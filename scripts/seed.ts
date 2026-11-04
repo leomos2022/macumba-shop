@@ -1,4 +1,4 @@
-// Seed del catálogo — Macumba Shop
+// Seed del catálogo — Macumba Arte-Magia
 // 6 prendas HECHAS A PEDIDO sobre denim reciclado (3 cortes × pintura textil / mangas tejidas "tipo Ludivia")
 // Nombres y precios confirmados por el taller — el arte es INTOCABLE: las fotos son ejecuciones reales.
 import { PrismaClient } from '@prisma/client';

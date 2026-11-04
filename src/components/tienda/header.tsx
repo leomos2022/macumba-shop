@@ -35,14 +35,14 @@ export function Header() {
         <Link
           href="/"
           className="group flex items-baseline gap-2 rounded-md focus-visible:outline-2 focus-visible:outline-ring"
-          aria-label="Macumba Shop — ir al inicio"
+          aria-label="Macumba Arte-Magia — ir al inicio"
         >
-          <span className="font-display text-[1.7rem] leading-none text-tinta">
+          <span className="font-marca text-[2rem] leading-none text-tinta">
             Macumba
           </span>
           <Rombo className="h-3 w-3 self-center text-morado transition-transform group-hover:rotate-45" />
           <span className="hidden text-[0.65rem] font-semibold tracking-marca text-verde sm:inline">
-            SHOP
+            ARTE-MAGIA
           </span>
         </Link>
 
@@ -62,7 +62,7 @@ export function Header() {
         {/* Acciones */}
         <div className="flex items-center gap-1.5">
           <a
-            href={urlWhatsApp("¡Hola, Macumba Shop! Vengo de la web.")}
+            href={urlWhatsApp("¡Hola, Macumba Arte-Magia! Vengo de la web.")}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Escríbenos por WhatsApp"
@@ -102,10 +102,10 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="right" className="w-72 bg-crema">
               <SheetHeader className="border-b border-border/70 text-left">
-                <SheetTitle className="font-display text-2xl text-tinta">
+                <SheetTitle className="font-marca text-[1.75rem] leading-none text-tinta">
                   Macumba
                   <span className="ml-1 text-xs font-sans font-semibold tracking-marca text-verde">
-                    SHOP
+                    ARTE-MAGIA
                   </span>
                 </SheetTitle>
               </SheetHeader>

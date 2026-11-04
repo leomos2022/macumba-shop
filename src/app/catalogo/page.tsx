@@ -5,9 +5,9 @@ import { VistaCatalogo } from "@/components/tienda/vistas";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "El Catálogo completo | Macumba Shop",
+  title: "El Catálogo completo | Macumba Arte-Magia",
   description:
-    "Las seis prendas de Macumba Shop de un vistazo: chaquetas torero, cazadoras y abrigos pintados y tejidos a mano, hechas a pedido. Filtros por categoría y género. Pago contra entrega en Bogotá.",
+    "Las seis prendas de Macumba Arte-Magia de un vistazo: chaquetas torero, cazadoras y abrigos pintados y tejidos a mano, hechas a pedido. Filtros por categoría y género. Pago contra entrega en Bogotá.",
 };
 
 export default async function CatalogoPage() {

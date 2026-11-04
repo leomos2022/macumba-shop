@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { VistaEstudio } from "@/components/tienda/vistas";
 
 export const metadata: Metadata = {
-  title: "El Estudio — personaliza tu prenda | Macumba Shop",
+  title: "El Estudio — personaliza tu prenda | Macumba Arte-Magia",
   description:
     "Elige la silueta, el color y la técnica —pintura a mano o bordado— y el colectivo interviene tu prenda. Denim reciclado, arte único.",
 };

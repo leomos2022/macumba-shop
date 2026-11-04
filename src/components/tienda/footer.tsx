@@ -14,10 +14,10 @@ export function Footer() {
         {/* Marca */}
         <div>
           <p className="flex items-baseline gap-2">
-            <span className="font-display text-3xl">Macumba</span>
+            <span className="font-marca text-[2.1rem] leading-none">Macumba</span>
             <Rombo className="h-3 w-3 self-center text-pistacho" />
             <span className="text-[0.65rem] font-semibold tracking-marca text-pistacho">
-              SHOP
+              ARTE-MAGIA
             </span>
           </p>
           <p className="mt-3 max-w-xs text-sm leading-relaxed text-crema/70">
@@ -56,7 +56,7 @@ export function Footer() {
             CONTACTO
           </p>
           <a
-            href={urlWhatsApp("¡Hola, Macumba Shop!")}
+            href={urlWhatsApp("¡Hola, Macumba Arte-Magia!")}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-4 inline-flex items-center gap-2 rounded-full border border-pistacho/40 px-4 py-2 text-sm font-medium text-crema transition-colors hover:bg-pistacho hover:text-verde-hondo focus-visible:outline-2 focus-visible:outline-ring"
@@ -74,7 +74,7 @@ export function Footer() {
 
       <div className="border-t border-crema/15">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-5 text-xs text-crema/60 sm:flex-row sm:px-6">
-          <p>© 2026 Macumba Shop · Hecho a mano en Bogotá</p>
+          <p>© 2026 Macumba Arte-Magia · Hecho a mano en Bogotá</p>
           <p className="flex items-center gap-2">
             <Rombo className="h-3 w-3 text-pistacho/70" />
             Viste Arte · Hecho a pedido
