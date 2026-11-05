@@ -23,7 +23,12 @@ const macondo = Macondo({
   display: "swap",
 });
 
+// URL canónica para las vistas previas al compartir (WhatsApp, etc.).
+// Si Vercel asigna otro dominio, definir NEXT_PUBLIC_SITE_URL en su panel.
+const URL_SITIO = process.env.NEXT_PUBLIC_SITE_URL ?? "https://macumba-shop.vercel.app";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(URL_SITIO),
   title: "Macumba Arte-Magia — Viste Arte",
   description:
     "Ropa de textiles reciclados intervenida a mano por artistas bogotanos. Chaquetas, cazadoras y abrigos pintados y tejidos a mano, hechos a pedido. Bogotá, Colombia.",
@@ -44,6 +49,21 @@ export const metadata: Metadata = {
     siteName: "Macumba Arte-Magia",
     type: "website",
     locale: "es_CO",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Macumba Arte-Magia — M de Macumba pintada a mano sobre verde claro",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Macumba Arte-Magia — Viste Arte",
+    description:
+      "Textiles reciclados, arte a mano. Prendas hechas a pedido desde Bogotá para toda Colombia.",
+    images: ["/og-image.png"],
   },
 };
 
