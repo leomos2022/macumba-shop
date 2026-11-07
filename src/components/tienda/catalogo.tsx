@@ -68,9 +68,10 @@ export function Catalogo({ productos, onVerDetalle }: Props) {
           </h2>
           <SeparadorRombo className="mt-5" />
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-tinta/70">
-            Seis prendas hechas a pedido sobre denim reciclado, pintadas y
-            tejidas a mano por el colectivo. Pasa el cursor sobre una —o
-            tócala— para ver su ficha y añadirla a la canasta.
+            Piezas reales pintadas y tejidas a mano sobre denim: la foto de
+            cada ficha es la prenda exacta que recibes, sin réplicas. Pasa el
+            cursor sobre una —o tócala— para ver su ficha y añadirla a la
+            canasta.
           </p>
         </div>
 

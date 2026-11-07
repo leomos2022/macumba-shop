@@ -18,13 +18,14 @@ type Slot = {
   etiqueta: string;
 };
 
-/** Orden real del reel: pintura → mangas tejidas → pintura → torero corta → mangas tejidas (cortes secos) */
+/** Orden real del reel: pintura → mangas tejidas → pintura → torero corta → mangas tejidas (cortes secos)
+ *  Cada segmento del video enlaza a una pieza real del catálogo; el último lleva a La Sala. */
 const DESFILE_SLOTS: Slot[] = [
-  { slug: "cazadora-pintura", etiqueta: "Cazadora pintura textil" },
-  { slug: "cazadora-ludivia", etiqueta: "Cazadora · mangas tejidas" },
-  { slug: "cazadora-pintura", etiqueta: "Cazadora pintura textil" },
-  { slug: "chaqueta-torero-corta-pintura", etiqueta: "Chaqueta torero (corta)" },
-  { slug: "cazadora-ludivia", etiqueta: "Cazadora · mangas tejidas" },
+  { slug: "cazadora-corta-pavorreal", etiqueta: "Cazadora pintura textil" },
+  { slug: "abrigo-pajaro-tejido", etiqueta: "Tejido a crochet" },
+  { slug: "cazadora-retrato-tropical", etiqueta: "Cazadora pintura textil" },
+  { slug: "chaqueta-torero-femenina", etiqueta: "Chaqueta torero (corta)" },
+  { slug: null, etiqueta: "El desfile completo en La Sala" },
 ];
 
 /**
